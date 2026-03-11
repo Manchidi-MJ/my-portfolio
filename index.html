@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magaseng John Manchidi | IT Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-text">Manchidi MJ</div>
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <span class="logo-text">M<span class="highlight">J</span>M</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#achievements" class="nav-link">Achievements</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#research" class="nav-link">Research</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <span class="greeting">Hello, I'm</span>
+                        <h1 class="glitch" data-text="Magaseng John Manchidi">Magaseng John Manchidi</h1>
+                        <div class="typed-container">
+                            <span class="typed-text"></span>
+                            <span class="cursor-typed">&nbsp;</span>
+                        </div>
+                        <p class="hero-description">Versatile IT Professional | Developer | Security Enthusiast</p>
+                        <div class="hero-buttons">
+                            <a href="#projects" class="btn primary">View Projects</a>
+                            <a href="#contact" class="btn secondary">Get in Touch</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="image-wrapper">
+                            <img src="My Picture.jpg" alt="Magaseng John Manchidi" class="profile-img">
+                            <div class="image-border"></div>
+                        </div>
+                        <div class="tech-icons">
+                            <i class="fab fa-python"></i>
+                            <i class="fas fa-shield-alt"></i>
+                            <i class="fas fa-network-wired"></i>
+                            <i class="fas fa-database"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span>Scroll Down</span>
+                    <div class="mouse"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2 class="section-title">About <span class="highlight">Me</span></h2>
+            <div class="about-container">
+                <div class="about-grid">
+                    <!-- Education -->
+                    <div class="about-card education">
+                        <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>Education</h3>
+                        <ul class="timeline">
+                            <li><span class="year">2025 - Present</span><p>MSc Computer Science - University of Limpopo</p></li>
+                            <li><span class="year">2025</span><p>BSc Honours Computer Science - University of Limpopo</p></li>
+                            <li><span class="year">2024</span><p>BSc Mathematical Sciences - University of Limpopo</p></li>
+                        </ul>
+                    </div>
+                    <!-- Certifications -->
+                    <div class="about-card certifications">
+                        <div class="card-icon"><i class="fas fa-certificate"></i></div>
+                        <h3>Certifications</h3>
+                        <ul class="cert-list">
+                            <li><i class="fas fa-check-circle"></i> Cisco Cybersecurity Essentials</li>
+                            <li><i class="fas fa-check-circle"></i> Cisco Data Science Essentials</li>
+                            <li><i class="fas fa-check-circle"></i> CHPC Programme - NITheCS</li>
+                        </ul>
+                    </div>
+                    <!-- Technical Skills -->
+                    <div class="about-card skills">
+                        <div class="card-icon"><i class="fas fa-code"></i></div>
+                        <h3>Technical Skills</h3>
+                        <div class="skill-bars">
+                            <div class="skill-item"><span>Network Security</span><div class="progress-bar"><div class="progress" style="width:90%"></div></div></div>
+                            <div class="skill-item"><span>Machine Learning</span><div class="progress-bar"><div class="progress" style="width:85%"></div></div></div>
+                            <div class="skill-item"><span>Python</span><div class="progress-bar"><div class="progress" style="width:88%"></div></div></div>
+                            <div class="skill-item"><span>SQL</span><div class="progress-bar"><div class="progress" style="width:85%"></div></div></div>
+                            <div class="skill-item"><span>Virtualization</span><div class="progress-bar"><div class="progress" style="width:80%"></div></div></div>
+                        </div>
+                    </div>
+                    <!-- Technologies & Tools (broad) -->
+                    <div class="about-card technologies">
+                        <div class="card-icon"><i class="fas fa-tools"></i></div>
+                        <h3>Technologies & Tools</h3>
+                        <div class="tech-cloud">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">SQL</span>
+                            <span class="tech-badge">R</span>
+                            <span class="tech-badge">Bash</span>
+                            <span class="tech-badge">C++</span>
+                            <span class="tech-badge">Java</span>
+                            <span class="tech-badge">Snort</span>
+                            <span class="tech-badge">pfSense</span>
+                            <span class="tech-badge">Wireshark</span>
+                            <span class="tech-badge">Nmap</span>
+                            <span class="tech-badge">Metasploit</span>
+                            <span class="tech-badge">VMware</span>
+                            <span class="tech-badge">VirtualBox</span>
+                            <span class="tech-badge">Scikit-learn</span>
+                            <span class="tech-badge">TensorFlow</span>
+                            <span class="tech-badge">Pandas</span>
+                            <span class="tech-badge">Git</span>
+                            <span class="tech-badge">Docker</span>
+                            <span class="tech-badge">Active Directory</span>
+                            <span class="tech-badge">Windows Server</span>
+                            <span class="tech-badge">Security Onion</span>
+                            <span class="tech-badge">Splunk</span>
+                            <span class="tech-badge">GSAP</span>
+                            <span class="tech-badge">SVG</span>
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">Responsive Design</span>
+                            <span class="tech-badge">Microinteractions</span>
+                            <span class="tech-badge">Gestures / Interaction</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Focus (Versatile IT Professional) -->
+        <section id="career-focus" class="section" style="padding: 60px 2rem;">
+            <h2 class="section-title">Versatile <span class="highlight">IT Professional</span></h2>
+            <div class="career-container" style="max-width: 1000px; margin: 0 auto; background: #fff; padding: 2.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">I am a versatile technologist with hands‑on experience across the IT spectrum – from software development and data analysis to network security and cloud infrastructure. My adaptable skill set allows me to contribute to diverse teams and tackle complex challenges.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: var(--border-radius-sm); text-align: center;">
+                        <i class="fas fa-code" style="color: var(--accent); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <h4>Software Development</h4>
+                    </div>
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: var(--border-radius-sm); text-align: center;">
+                        <i class="fas fa-chart-line" style="color: var(--accent); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <h4>Data Science & ML</h4>
+                    </div>
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: var(--border-radius-sm); text-align: center;">
+                        <i class="fas fa-network-wired" style="color: var(--accent); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <h4>Network Administration</h4>
+                    </div>
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: var(--border-radius-sm); text-align: center;">
+                        <i class="fas fa-shield-alt" style="color: var(--accent); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <h4>Cybersecurity</h4>
+                    </div>
+                    <div style="background: var(--bg-light); padding: 1rem; border-radius: var(--border-radius-sm); text-align: center;">
+                        <i class="fas fa-cloud" style="color: var(--accent); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <h4>Cloud & DevOps</h4>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; font-style: italic; color: var(--text-muted);">"I thrive at the intersection of development, operations, and security – building robust systems that are both innovative and resilient."</p>
+            </div>
+        </section>
+
+        <!-- Achievements (broad) -->
+        <section id="achievements" class="section" style="padding: 60px 2rem; background: #f0f4f8;">
+            <h2 class="section-title">Key <span class="highlight">Achievements</span></h2>
+            <div class="achievements-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+                <div class="achievement-card" style="background: #fff; padding: 2rem; border-radius: var(--border-radius); text-align: center; box-shadow: var(--shadow);">
+                    <div style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;">8+</div>
+                    <h4>Full‑Stack Projects</h4>
+                    <p>Designed and deployed applications using Python, Java, C++, SQL, and modern web technologies.</p>
+                </div>
+                <div class="achievement-card" style="background: #fff; padding: 2rem; border-radius: var(--border-radius); text-align: center; box-shadow: var(--shadow);">
+                    <div style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;">5+</div>
+                    <h4>Network Environments</h4>
+                    <p>Architected segmented virtual networks with firewalls, Active Directory, and monitoring.</p>
+                </div>
+                <div class="achievement-card" style="background: #fff; padding: 2rem; border-radius: var(--border-radius); text-align: center; box-shadow: var(--shadow);">
+                    <div style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;">99%</div>
+                    <h4>ML Model Accuracy</h4>
+                    <p>Achieved state‑of‑the‑art results in ransomware detection using ensemble learning.</p>
+                </div>
+                <div class="achievement-card" style="background: #fff; padding: 2rem; border-radius: var(--border-radius); text-align: center; box-shadow: var(--shadow);">
+                    <div style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;">3+</div>
+                    <h4>Research Papers</h4>
+                    <p>Authored research on cybersecurity, edge computing, and incident response.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (filter includes Software Dev) -->
+        <section id="projects" class="section">
+            <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="software">Software Dev</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="research">Research</button>
+            </div>
+            <div class="projects-grid" id="projects-container"></div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="section">
+            <h2 class="section-title">Research & <span class="highlight">Publications</span></h2>
+            <div class="research-container">
+                <div class="research-card featured">
+                    <div class="research-badge">Honours Thesis</div>
+                    <h3>Evaluating Machine Learning Techniques for Adaptive Ransomware Detection</h3>
+                    <div class="research-meta">
+                        <span><i class="fas fa-calendar"></i> 2025</span>
+                        <span><i class="fas fa-users"></i> Dr SS Mapunya, Prof M Velempini</span>
+                    </div>
+                    <p class="research-abstract">Conducted a comprehensive evaluation of supervised and unsupervised machine learning models for ransomware detection using public datasets (Malimg, Microsoft BIG 2015). Achieved 99.34% accuracy with Random Forest, demonstrating the effectiveness of ensemble methods. Analyzed feature importance and model adaptability to zero‑day variants.</p>
+                    <div class="research-tech">
+                        <span>Python</span>
+                        <span>Scikit-learn</span>
+                        <span>TensorFlow</span>
+                        <span>Pandas</span>
+                    </div>
+                    <a href="#" class="read-more">Read Paper <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="research-grid">
+                    <div class="research-card">
+                        <h4>Mobile Edge Computing (MEC)</h4>
+                        <p>Investigated the paradigm of Mobile Edge Computing, its benefits, challenges, and use cases for autonomous vehicles and smart manufacturing. Proposed solutions for security and resource management.</p>
+                        <div class="research-tech"><span>Edge Computing</span><span>5G</span><span>IoT</span></div>
+                    </div>
+                    <div class="research-card">
+                        <h4>Inadequate Post‑Attack Procedures in Cybersecurity</h4>
+                        <p>Researched the importance of post‑attack procedures, identified common gaps in incident response, and proposed best practices for effective recovery and organizational resilience.</p>
+                        <div class="research-tech"><span>Incident Response</span><span>Forensics</span><span>Recovery</span></div>
+                    </div>
+                    <div class="research-card">
+                        <h4>Cybersecurity Homelab Implementation</h4>
+                        <p>Documented the implementation of a comprehensive cybersecurity homelab simulating a small business network environment with pfSense, Active Directory, and security monitoring tools.</p>
+                        <div class="research-tech"><span>pfSense</span><span>Active Directory</span><span>SIEM</span></div>
+                    </div>
+                    <div class="research-card">
+                        <h4>IDS/IPS Configuration with Snort</h4>
+                        <p>Developed and tested custom Snort rules for detecting and preventing various network attacks in a controlled virtual lab environment.</p>
+                        <div class="research-tech"><span>Snort</span><span>Kali Linux</span><span>Metasploitable</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section with Working Form (Web3Forms) -->
+        <section id="contact" class="section">
+            <h2 class="section-title">Get In <span class="highlight">Touch</span></h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <a href="mailto:johnmanchidi@gmail.com">johnmanchidi@gmail.com</a>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fab fa-github"></i>
+                        <h3>GitHub</h3>
+                        <a href="https://github.com/Manchidi-MJ" target="_blank">github.com/Manchidi-MJ</a>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fab fa-linkedin"></i>
+                        <h3>LinkedIn</h3>
+                        <a href="https://www.linkedin.com/in/magaseng-john-manchidi-920442255/" target="_blank">Magaseng John Manchidi</a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send me a message</h3>
+                    <!-- Web3Forms integration – using your existing key -->
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+                        <input type="hidden" name="access_key" value="e11f1f1b-b689-4f02-a31f-b3d399b836d4">
+                        <input type="hidden" name="subject" value="New message from portfolio">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <!-- Honeypot to prevent spam -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        <button type="submit" class="btn primary">Send Message</button>
+                    </form>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                        <i class="fas fa-info-circle"></i> Your message will be sent securely via Web3Forms.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-widget">
+        <button class="chatbot-toggle" id="chatToggle"><i class="fas fa-comment"></i><span>Chat with me</span></button>
+        <div class="chatbot-window" id="chatWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-title"><i class="fas fa-robot"></i><h4>Portfolio Assistant</h4></div>
+                <button class="chatbot-close" id="chatClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot"><div class="message-content">Hi! I'm John's virtual assistant. Ask me about his projects, research, skills, or experience!</div></div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Type your message..." autocomplete="off">
+                <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Magaseng John Manchidi. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#projects">Projects</a>
+                <a href="#research">Research</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
