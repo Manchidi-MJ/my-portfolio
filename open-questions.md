@@ -36,10 +36,12 @@ H. **Git history purge** of the old `Research Paper.pdf` — holding until redac
 - ✅ Task 12: contact form mailto fallback on failure + README note to restrict the Web3Forms key to the domain.
 - ✅ P2: sitemap `<lastmod>` stamped at build; visible focus rings on inputs; README Deploy section rewritten; non-blocking Lighthouse CI job.
 
-## Deferred — honest reasons (not done)
-- **Self-host + subset fonts (part of Task 10):** needs the woff2 binaries downloaded/subset; this sandbox is `INTEGRATIONS_ONLY` (no external fetch). Plan: download Inter + Sora latin-subset woff2, place in `fonts/`, add `@font-face` with `font-display: swap`, drop the Google Fonts `<link>`.
-- **Replace Font Awesome with inline SVG (part of Task 10):** a full icon swap across ~40 icons is large and breakage-prone; deferred as a focused follow-up (subset FA or inline only the used icons). Current FA load is render-non-blocking enough to not gate correctness.
-- These are performance polish; they don't affect correctness or honesty. Lighthouse CI will quantify the gap.
+## Task 10 fonts/icons — achievable part done; rest blocked by the sandbox
+- ✅ **Made Google Fonts + Font Awesome non-render-blocking** (async `media="print"` + `onload` swap, `<noscript>` fallback). This is the main render-blocking perf win and needs no binaries.
+- ⛔ **Self-hosting/subsetting fonts** and an **inline-SVG icon set** still need the font/icon binaries. This sandbox is `INTEGRATIONS_ONLY` and the CDN returns 403, so I cannot download or subset them here. **Plan for a connected environment:**
+  1. Fonts: download Inter (400–700) + Sora (600–800) **latin-subset woff2**, place in `fonts/`, add `@font-face { font-display: swap }`, drop the Google Fonts `<link>`, and `rel=preload` the two most-used weights.
+  2. Icons: the site uses ~52 unique Font Awesome icons (list derivable via `grep -ohE 'fa-[a-z0-9-]+'`). Either build a small SVG sprite of just those and swap `<i class="fa-*">` for `<svg><use>`, or self-host a subset of FA. Then remove the FA CDN `<link>`.
+- These are perf polish only; correctness/honesty are unaffected. The non-blocking Lighthouse CI job quantifies the remaining gap.
 
 ## Env note
 Sandbox is `INTEGRATIONS_ONLY`: no poppler/image tooling and no inline binary writes here — so the actual PDFs/photos/thumbnails must be uploaded by you; CI (poppler) runs the authoritative PDF privacy scan.
