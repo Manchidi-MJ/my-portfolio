@@ -18,8 +18,16 @@ import { join, extname } from 'node:path';
 const ROOT = process.cwd();
 const STRICT = process.argv.includes('--strict') || process.env.CONTENT_CHECK_STRICT === '1';
 
-const TEXT_EXT = new Set(['.html', '.css', '.js', '.mjs', '.json', '.md', '.xml', '.txt', '.yml', '.yaml', '.svg']);
+const TEXT_EXT = new Set(['.html', '.css', '.js', '.mjs', '.json', '.xml', '.txt', '.yml', '.yaml', '.svg']);
 const SKIP_DIRS = new Set(['.git', 'node_modules', '.github']);
+
+// Documentation that intentionally *describes* the forbidden values (the audit,
+// the open-questions log and the README's privacy instructions). These are not
+// shipped site content, so they are exempt from the privacy scan. All other
+// files — including every .html/.css/.js that renders the site — are scanned.
+// NOTE: .md is deliberately omitted from TEXT_EXT so docs aren't scanned; if you
+// add Markdown that becomes *published content*, scan it explicitly instead.
+const SKIP_FILES = new Set(['audit.md', 'open-questions.md', 'README.md']);
 
 // Hard-fail patterns. Phone variants cover spacing, +27 vs 0, and bare digits.
 const FORBIDDEN = [
@@ -45,6 +53,7 @@ for (const file of walk(ROOT)) {
     // Don't scan this checker itself (it necessarily contains the patterns).
     if (file.endsWith(join('scripts', 'check-content.mjs'))) continue;
     const rel = file.slice(ROOT.length + 1);
+    if (SKIP_FILES.has(rel)) continue;
     const lines = readFileSync(file, 'utf8').split(/\r?\n/);
     lines.forEach((line, i) => {
         for (const f of FORBIDDEN) {

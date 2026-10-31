@@ -146,3 +146,21 @@ Not run in this environment (no headless browser/network). To be captured locall
 5. **Ransomware 99.34% figure:** reframe as "the thesis reports…" or mark `[CONFIRM]` until the redacted PDF is published?
 6. **Photo:** is there a photographer watermark to crop? OK to export a WebP and strip EXIF?
 7. **Certifications** (Cisco Cybersecurity Essentials, Cisco Data Science Essentials, CHPC/NITheCS): add? issue dates + credential links?
+
+---
+
+# Step 1 — progress log (implemented)
+
+Branch `step1/honesty-positioning-certs`. No framework added (plain HTML/CSS/JS). Each commit was `node --check`ed.
+
+- **P1-IA-1 / P1-IA-2 Positioning (blend Security + Data):** rewrote hero ("building secure networks and turning data into decisions", View projects / Download CV CTAs, "What I'm looking for" line); About + facts now lead with BSc Honours CS (2025), Johannesburg; retitled `<title>`/meta/OG/Twitter/JSON-LD to Cybersecurity & Data Analysis; removed unconfirmed Constructor University `alumniOf`.
+- **Master's → [CONFIRM]:** education section demotes both Master's to a single `[CONFIRM]` placeholder; prior wording preserved verbatim in an HTML comment; stats band no longer asserts "Master's in progress".
+- **P0-HON-1 (99.34%):** reworded to "In my honours thesis, a Random Forest model achieved 99.34% accuracy on the evaluated dataset."
+- **P0-HON-2 (Status blocks):** added `status` to every project + a visible badge (Built & verified / Partially built / Designed only) on cards and a dedicated Status block in the modal. HomeLab = **Partially built** with explicit deployed-vs-designed split; IDS/IPS enriched with verified lab specifics (SCSE082, 192.168.56.0/24, Kali .5 / Snort .103 / Metasploitable 2, UnrealIRCd+FTP backdoor rules, tuning/suppressions). Data-analysis-dashboard = **Designed only**.
+- **P0-HON-3 (Illustrative scenario):** Post-Attack research item now labels the "XYZ Corp" breach an illustrative scenario and keeps figures to what the report states.
+- **Certifications:** added a Certifications section (Cisco Cybersecurity Essentials, Cisco Data Science Essentials, CHPC/NITheCS) with no dates/links until supplied.
+- **P1-DOC-1 (Documents):** new Documents table driven by a `DOCUMENTS` data array; IDS/IPS (66pp) and HomeLab (18pp) listed **separately** (merged 84pp intentionally excluded); all rows **gated** behind "Request full report" until redacted PDFs arrive; note that PDFs publish only after a `pdftotext`/`pdfinfo` check.
+- **P2-DEP-1 (CI):** `scripts/check-content.mjs` (hard-fail on student/phone number; warn on `[CONFIRM]`, `--strict` to fail), `scripts/check-links.mjs` (local files + in-page anchors), and `.github/workflows/ci.yml` (node --check → content → links → **authoritative poppler PDF scan** → deploy to Pages on `main`).
+
+## Still pending (need owner/assets) — see open-questions.md
+Redacted PDFs, phone-free `CV.pdf`, `images/profile.webp` (crop "Masala Lee" watermark, strip EXIF), exact Master's wording, certification dates/links, git-history purge. Design polish (self-hosted/subset fonts, WebP images, Font Awesome subset, modal focus trap, SVG/Mermaid topology diagram, lightbox) and Lighthouse before/after are the next tranche.
