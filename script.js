@@ -800,6 +800,7 @@ function closeModal() {
         { label: 'Skills', sub: 'Section', icon: 'fa-screwdriver-wrench', action: () => go('#skills') },
         { label: 'Projects', sub: 'Section', icon: 'fa-layer-group', action: () => go('#projects') },
         { label: 'Research', sub: 'Section', icon: 'fa-flask', action: () => go('#research') },
+        { label: 'Certifications', sub: 'Section', icon: 'fa-certificate', action: () => go('#certifications') },
         { label: 'GitHub section', sub: 'Section', icon: 'fa-code-branch', action: () => go('#github') },
         { label: 'CV', sub: 'Section', icon: 'fa-file-lines', action: () => go('#cv') },
         { label: 'Contact', sub: 'Section', icon: 'fa-envelope', action: () => go('#contact') },
