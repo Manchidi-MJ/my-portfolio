@@ -49,10 +49,14 @@ function statusBadge(status) {
     if (!el) return;
     let done = false;
     const hide = () => { if (done) return; done = true; el.classList.add('hidden'); };
-    const delay = prefersReduced ? 150 : 700;
 
+    // Skip the loader entirely on repeat visits this session.
+    if (sessionStorage.getItem('seen')) { el.classList.add('hidden'); return; }
+    sessionStorage.setItem('seen', '1');
+
+    // Short, non-blocking: at most ~180ms.
+    const delay = prefersReduced ? 0 : 180;
     if (document.readyState === 'complete') {
-        // 'load' has already fired — hide after a short beat.
         setTimeout(hide, delay);
     } else {
         window.addEventListener('load', () => setTimeout(hide, delay), { once: true });

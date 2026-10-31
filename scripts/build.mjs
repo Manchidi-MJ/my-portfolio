@@ -8,7 +8,7 @@
  *
  * Usage:  node scripts/build.mjs
  */
-import { readdirSync, statSync, mkdirSync, copyFileSync, rmSync, existsSync } from 'node:fs';
+import { readdirSync, statSync, mkdirSync, copyFileSync, rmSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 
 const ROOT = process.cwd();
@@ -58,3 +58,26 @@ if (missing.length) console.log('Note (not yet present, will be included once ad
 
 // Prerender dynamic sections into dist/index.html for no-JS visibility.
 await import('./prerender.mjs');
+
+// Content-hash cache-busting: rewrite ?v=... on local css/js to a hash of their
+// bytes, so a changed asset always busts the cache and an unchanged one doesn't.
+{
+    const { createHash } = await import('node:crypto');
+    const hash = f => existsSync(join(DIST, f))
+        ? createHash('sha1').update(readFileSync(join(DIST, f))).digest('hex').slice(0, 10)
+        : null;
+    const idx = join(DIST, 'index.html');
+    if (existsSync(idx)) {
+        let html = readFileSync(idx, 'utf8');
+        for (const asset of ['style.css', 'script.js', 'data.js']) {
+            const h = hash(asset);
+            if (!h) continue;
+            const re = new RegExp(`(${asset.replace('.', '\\.')})\\?v=[^"']*`, 'g');
+            html = html.replace(re, `$1?v=${h}`);
+            // Also hash assets that currently have no ?v= (defensive).
+            html = html.replace(new RegExp(`(["'])(${asset.replace('.', '\\.')})(["'])`, 'g'), `$1$2?v=${h}$3`);
+        }
+        writeFileSync(idx, html);
+        console.log('Applied content-hash cache-busting to dist/index.html');
+    }
+}
