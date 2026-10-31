@@ -274,6 +274,21 @@ const RESEARCH = [
     { title: 'IDS/IPS Configuration with Snort', desc: 'Developed and tested custom Snort rules for detecting and preventing network attacks in a controlled virtual lab.', tags: ['Snort', 'Kali Linux', 'Metasploitable'] }
 ];
 
+/* DOCUMENTS — reports/PDFs. Each entry is either:
+   - status 'available': a redacted/clean PDF exists at `file` → View + Download.
+   - status 'gated': no publishable (redacted) copy yet → "Request full report" mailto.
+   Filenames are lowercase-hyphenated and expected in the repo root once supplied.
+   NOTE: the merged 84-page IDS/IPS+Homelab PDF must NOT be published; publish the two
+   source reports separately (per Magaseng's instruction). */
+const DOCUMENTS = [
+    { title: 'IDS/IPS with Snort — report', course: 'SCSE082', date: 'Oct 2025', pages: 66, size: '—', status: 'gated', file: 'docs/ids-ips-snort-report.pdf' },
+    { title: 'Cybersecurity HomeLab — report', course: 'Project', date: '2025', pages: 18, size: '—', status: 'gated', file: 'docs/cybersecurity-homelab-report.pdf' },
+    { title: 'Evaluating ML for Adaptive Ransomware Detection (Honours thesis)', course: 'Honours', date: '2025', pages: '—', size: '—', status: 'gated', file: 'docs/honours-thesis-ransomware.pdf' },
+    { title: 'Inadequate Post-Attack Procedures — research report', course: 'Research', date: 'Oct 2025', pages: '—', size: '—', status: 'gated', file: 'docs/post-attack-procedures-report.pdf' },
+    { title: 'Mobile Edge Computing — research assignment', course: 'Research', date: '2025', pages: '—', size: '—', status: 'gated', file: 'docs/mobile-edge-computing-assignment.pdf' }
+];
+const REQUEST_EMAIL = 'johnmanchidi@gmail.com';
+
 const PROJECT_CATS = [
     { key: 'all', label: 'All' },
     { key: 'data-eng', label: 'Data Engineering' },
@@ -652,6 +667,34 @@ function closeModal() {
 })();
 
 /* ---------------------------------------------------------
+   DOCUMENTS TABLE
+--------------------------------------------------------- */
+(function documents() {
+    const body = $('#docsBody');
+    if (!body) return;
+    const esc = s => String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+    body.innerHTML = DOCUMENTS.map(d => {
+        let access;
+        if (d.status === 'available' && d.file) {
+            access = `<a class="doc-link" href="${esc(d.file)}" target="_blank" rel="noopener"><i class="fas fa-eye" aria-hidden="true"></i> View</a>
+                      <a class="doc-link" href="${esc(d.file)}" download><i class="fas fa-download" aria-hidden="true"></i> Download</a>`;
+        } else {
+            const subject = encodeURIComponent('Request for full report: ' + d.title);
+            const mailBody = encodeURIComponent('Hi Magaseng,\n\nPlease could you share the full report: "' + d.title + '".\n\nThanks.');
+            access = `<a class="doc-link request" href="mailto:${REQUEST_EMAIL}?subject=${subject}&body=${mailBody}"><i class="fas fa-envelope" aria-hidden="true"></i> Request full report</a>`;
+        }
+        return `<tr>
+            <td data-th="Title">${esc(d.title)}</td>
+            <td data-th="Course">${esc(d.course)}</td>
+            <td data-th="Date">${esc(d.date)}</td>
+            <td data-th="Pages">${esc(d.pages)}</td>
+            <td data-th="Size">${esc(d.size)}</td>
+            <td data-th="Access" class="doc-access">${access}</td>
+        </tr>`;
+    }).join('');
+})();
+
+/* ---------------------------------------------------------
    GITHUB INTEGRATION (graceful fallback)
 --------------------------------------------------------- */
 (function github() {
@@ -801,6 +844,7 @@ function closeModal() {
         { label: 'Projects', sub: 'Section', icon: 'fa-layer-group', action: () => go('#projects') },
         { label: 'Research', sub: 'Section', icon: 'fa-flask', action: () => go('#research') },
         { label: 'Certifications', sub: 'Section', icon: 'fa-certificate', action: () => go('#certifications') },
+        { label: 'Documents', sub: 'Section', icon: 'fa-file-pdf', action: () => go('#documents') },
         { label: 'GitHub section', sub: 'Section', icon: 'fa-code-branch', action: () => go('#github') },
         { label: 'CV', sub: 'Section', icon: 'fa-file-lines', action: () => go('#cv') },
         { label: 'Contact', sub: 'Section', icon: 'fa-envelope', action: () => go('#contact') },

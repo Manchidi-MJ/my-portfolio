@@ -33,7 +33,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link rel="stylesheet" href="style.css?v=2025103105" />
+    <link rel="stylesheet" href="style.css?v=2025103106" />
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -92,6 +92,7 @@
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#research" class="nav-link">Research</a></li>
                 <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#documents" class="nav-link">Documents</a></li>
                 <li><a href="#github" class="nav-link">GitHub</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
@@ -397,8 +398,40 @@
             </div>
         </section>
 
+        <!-- ===== DOCUMENTS ===== -->
+        <section id="documents" class="section alt" aria-labelledby="docs-title">
+            <div class="wrap">
+                <p class="kicker">Documents</p>
+                <h2 class="section-title" id="docs-title">Reports &amp; <span class="accent">documents</span></h2>
+                <p class="section-lead">
+                    Final versions of my project and research reports. To protect personal information, reports are
+                    shared on request until redacted copies (student number removed) are published here.
+                </p>
+                <div class="docs-table-wrap">
+                    <table class="docs-table" id="docsTable" aria-label="Project and research documents">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Course</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Pages</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Access</th>
+                            </tr>
+                        </thead>
+                        <tbody id="docsBody"></tbody>
+                    </table>
+                </div>
+                <p class="section-note">
+                    <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                    Draft files are excluded; only final versions are listed. PDFs are published only after they have been
+                    checked (with <code>pdftotext</code>/<code>pdfinfo</code>) to confirm no student or phone number remains.
+                </p>
+            </div>
+        </section>
+
         <!-- ===== GITHUB ===== -->
-        <section id="github" class="section alt" aria-labelledby="gh-title">
+        <section id="github" class="section" aria-labelledby="gh-title">
             <div class="wrap">
                 <p class="kicker">GitHub</p>
                 <h2 class="section-title" id="gh-title">Live from <span class="accent">GitHub</span></h2>
@@ -418,7 +451,7 @@
         </section>
 
         <!-- ===== CV ===== -->
-        <section id="cv" class="section" aria-labelledby="cv-title">
+        <section id="cv" class="section alt" aria-labelledby="cv-title">
             <div class="wrap center-wrap">
                 <p class="kicker">Curriculum Vitae</p>
                 <h2 class="section-title" id="cv-title">Download my <span class="accent">CV</span></h2>
@@ -431,14 +464,15 @@
                         <span class="cv-pending"><i class="fas fa-circle-info" aria-hidden="true"></i> CV coming soon</span>
                     </div>
                     <p class="cv-hint" id="cvHint">
-                        To enable a download button here, add a <code>CV.pdf</code> file to the repository root.
+                        To enable a download button, add a privacy-checked <code>CV.pdf</code> (no phone number) to the
+                        repository root — verified with <code>pdftotext</code> before publishing.
                     </p>
                 </div>
             </div>
         </section>
 
         <!-- ===== CONTACT ===== -->
-        <section id="contact" class="section alt" aria-labelledby="contact-title">
+        <section id="contact" class="section" aria-labelledby="contact-title">
             <div class="wrap">
                 <p class="kicker">Contact</p>
                 <h2 class="section-title" id="contact-title">Let's <span class="accent">connect</span></h2>
@@ -545,6 +579,6 @@
         </div>
     </div>
 
-    <script src="script.js?v=2025103105" defer></script>
+    <script src="script.js?v=2025103106" defer></script>
 </body>
 </html>

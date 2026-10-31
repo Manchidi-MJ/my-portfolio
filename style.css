@@ -519,3 +519,31 @@ footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 
 .cert-org { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px; }
 .cert-pending { display: inline-flex; align-items: center; gap: 7px; font-size: 0.78rem; color: var(--text-muted); opacity: 0.85; }
 .cert-pending i { color: var(--blue); }
+
+/* ===== Documents table ===== */
+.docs-table-wrap { margin-top: 28px; overflow-x: auto; border: 1px solid var(--border); border-radius: 16px; }
+.docs-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.docs-table thead th {
+    text-align: left; padding: 14px 16px; background: var(--surface-2);
+    color: var(--text); font-weight: 600; border-bottom: 1px solid var(--border); white-space: nowrap;
+}
+.docs-table tbody td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-muted); vertical-align: middle; }
+.docs-table tbody tr:last-child td { border-bottom: 0; }
+.docs-table tbody tr:hover { background: rgba(76, 141, 255, 0.05); }
+.docs-table td:first-child { color: var(--text); font-weight: 500; }
+.doc-access { display: flex; gap: 14px; flex-wrap: wrap; }
+.doc-link { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); font-weight: 600; font-size: 0.85rem; text-decoration: none; }
+.doc-link:hover { color: var(--gold); }
+.doc-link.request { color: var(--gold); }
+
+@media (max-width: 720px) {
+    .docs-table-wrap { overflow: visible; border: 0; }
+    .docs-table, .docs-table tbody, .docs-table tr, .docs-table td { display: block; width: 100%; }
+    .docs-table thead { display: none; }
+    .docs-table tr { border: 1px solid var(--border); border-radius: 14px; margin-bottom: 14px; padding: 6px 4px; background: var(--surface); }
+    .docs-table td { border-bottom: 0; padding: 8px 16px; display: flex; justify-content: space-between; gap: 16px; }
+    .docs-table td::before { content: attr(data-th); font-weight: 600; color: var(--text); }
+    .docs-table td:first-child { display: block; }
+    .docs-table td:first-child::before { display: block; margin-bottom: 4px; color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+    .doc-access { justify-content: flex-end; }
+}
