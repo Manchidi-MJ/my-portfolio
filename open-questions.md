@@ -1,35 +1,37 @@
-# Open Questions — awaiting Magaseng's confirmation
+# Open Questions — status
 
-Anything here is **unconfirmed**. Nothing below has been invented or published as fact.
-Items map to findings in `audit.md`.
+Legend: ✅ resolved · ⏳ still needs you · 🔒 on hold at your request.
+Nothing here is invented or published as fact.
 
-## Decisions needed before P1 content work
-1. **Positioning / narrative** (P1-IA-1)
-   - Option A — Entry-level **Security + Data** (per the improvement prompt): hero = *"Computer Science Honours graduate building secure networks and turning data into decisions"*, two tracks, "What I'm looking for" line.
-   - Option B — Keep current **dual-Master's CS & Data Engineering** framing.
-   - Option C — Blend (lead with Honours + job-seeking, keep Master's as "currently pursuing").
-   - **Your call:** ______
+## Resolved (answered in your last message — now implemented)
+1. ✅ **Positioning** — **Blend Security + Data.** Hero/meta/About updated; BSc Honours CS (2025) leads. Any Master's claim is a `[CONFIRM]` placeholder (prior wording kept in an HTML comment) until you supply exact wording.
+2. ✅ **HomeLab deployed vs planned** — Built & verified: **pfSense, Windows Server AD/DNS/DHCP, Kali, Nessus**. Everything else (Security Onion, Splunk, Wazuh, DMZ web/mail, internal CA) now labelled **Designed / planned**. Status block added.
+3. ✅ **IDS/IPS report** — publish the **66-page Snort** report and the **18-page HomeLab** report **separately**; the merged 84-page file is **not** published. Documents table reflects this.
+4. ✅ **99.34% figure** — reworded to *"In my honours thesis, a Random Forest model achieved 99.34% accuracy on the evaluated dataset."*
+5. ✅ **Photo** — agreed: crop the **"Masala Lee"** watermark, strip EXIF, export **WebP**. (Pending the asset step — see ⏳ below.)
+6. ✅ **Certifications** — added **Cisco Cybersecurity Essentials**, **Cisco Data Science Essentials**, **CHPC (NITheCS)**; no dates/links until you supply them.
+7. ✅ **CV** — will publish a **phone-number-free** copy, verified with `pdftotext`. Wiring + privacy note in place; awaiting the file.
 
-2. **Cybersecurity HomeLab — what was actually deployed?** (P0-HON-2)
-   - Confirmed-by-screenshots per the prompt: pfSense dashboard + admin, static IP/gateway, ping tests, Windows Server roles (AD DS, DNS, DHCP, file services), AD user creation, Nessus on Kali + nessusd troubleshooting.
-   - Mark as **Designed / planned** unless you confirm: Security Onion, Splunk, Wazuh, DMZ web/mail servers, internal CA.
-   - **Confirm which (if any) were truly deployed:** ______
+## Still needs you ⏳
+A. **Redacted / clean PDFs** (student number removed, verified). Expected filenames (lowercase-hyphenated, in `docs/`):
+   - `docs/ids-ips-snort-report.pdf` (66pp)
+   - `docs/cybersecurity-homelab-report.pdf` (18pp)
+   - `docs/honours-thesis-ransomware.pdf`
+   - `docs/post-attack-procedures-report.pdf`
+   - `docs/mobile-edge-computing-assignment.pdf`
+   Until supplied, each row shows **"Request full report"** (mailto). When you add a file, flip its `DOCUMENTS` entry `status` to `'available'`.
+B. **CV file** — add a privacy-checked `CV.pdf` (no phone number) to the repo root; the CV section auto-detects it.
+C. **Profile photo asset** — supply (or approve me producing) `images/profile.webp`: cropped to remove the "Masala Lee" watermark, EXIF stripped, ~800px. *(I can't run image tooling in this sandbox — `INTEGRATIONS_ONLY`.)*
+D. **Master's — exact wording** (institution(s), degree title(s), dates/status) to replace the `[CONFIRM]` placeholder.
+E. **Certification dates + credential URLs** (optional) when available.
+F. **Exact scope/results** for the two coursework projects currently marked `[CONFIRM]` (Secure Backend Database System; Statistical Modelling group project) if you want specific metrics shown.
 
-3. **IDS/IPS report — which is final?** (P1-DOC-1) — 66-page or 84-page? (Publish one only.) **Your call:** ______
+## On hold 🔒
+G. **Git history purge** of the old `Research Paper.pdf` — holding until the redacted PDFs are in, then I'll rewrite history + force-push (I'll confirm scope first).
 
-4. **Ransomware 99.34% accuracy figure** (P0-HON-1) — reframe as *"the thesis reports…"* and gate behind the report request, or mark `[CONFIRM]` until a redacted PDF is published? **Your call:** ______
+## Environment note carried into CI
+- The sandbox is `INTEGRATIONS_ONLY`, so `pdftotext`/`pdfinfo` and image tooling can't run here. The **authoritative PDF privacy scan runs in GitHub Actions** (`.github/workflows/ci.yml`) using poppler-utils.
 
-5. **Profile photo** (P1-PRIV-3) — is there a photographer watermark (bottom-left) to crop? OK to export a ~800px WebP and strip EXIF? **Your call:** ______
-
-6. **Certifications** (per prompt) — add Cisco Cybersecurity Essentials, Cisco Data Science Essentials, CHPC Programme (NITheCS)? If yes, supply **issue dates** and **credential URLs** (otherwise listed without unverifiable detail). **Your call:** ______
-
-## Privacy / assets you will supply
-7. **Redacted PDFs** (student number removed) for: honours thesis, Cybersecurity Homelab report, IDS/IPS report, Post-Attack Procedures report + presentation, Mobile Edge Computing assignment. Until supplied, each stays gated behind a **"Request full report"** mailto (no direct download).
-8. **Git history purge** of `Research Paper.pdf` — **on hold at your request** until redacted PDFs arrive. When you say go, I'll rewrite history and force-push (destructive; I'll confirm scope first).
-9. **Links** — confirm LinkedIn URL (`linkedin.com/in/magaseng-john-manchidi-920442255/`) and GitHub (`github.com/Manchidi-MJ`). Email confirmed: `johnmanchidi@gmail.com`.
-
-## Environment limitation to carry into CI
-10. **PDF verification tooling** — this sandbox is `INTEGRATIONS_ONLY`, so `pdftotext`/`pdfinfo` (poppler-utils) could not be installed. The authoritative PDF secret-scan must run in GitHub Actions (planned, P2-DEP-1) or locally. Fallback stdlib extraction was used for this audit only.
-
-## Items marked [CONFIRM] in content (build will fail on these once CI lands)
-- *(none yet — will be added as draft content is written, e.g. certification dates, the 99.34% figure if you choose that route)*
+## [CONFIRM] markers currently in the codebase (CI warns; will fail once --strict)
+- `index.html` — Postgraduate/Master's placeholder (2 lines) → needs item D.
+- `script.js` — Secure Backend DB & Statistical Modelling status detail → needs item F.

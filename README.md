@@ -43,17 +43,26 @@ maintain and simple to deploy on GitHub Pages.
 
 ```
 my-portfolio/
-├── index.html        # Single-page portfolio
-├── style.css         # Design system + all component styles (themed)
-├── script.js         # All interactivity, data, GitHub + form logic
-├── 404.html          # Custom not-found page
-├── robots.txt        # Crawl directives
-├── sitemap.xml       # Sitemap
-├── .nojekyll         # Serve files as-is on GitHub Pages
-├── My Picture.jpg    # Profile photograph
-├── Research Paper.pdf # Honours thesis document
+├── index.html         # Single-page portfolio
+├── style.css          # Design system + all component styles (themed)
+├── script.js          # Interactivity + data (PROJECTS, DOCUMENTS, SKILLS, …)
+├── 404.html           # Custom not-found page
+├── robots.txt         # Crawl directives
+├── sitemap.xml        # Sitemap
+├── .nojekyll          # Serve files as-is on GitHub Pages
+├── My Picture.jpg     # Profile photograph (watermark to be cropped → images/profile.webp)
+├── docs/              # Redacted, privacy-checked PDFs (added as supplied)
+├── scripts/
+│   ├── check-content.mjs  # Privacy/[CONFIRM] guard (Node, no deps)
+│   └── check-links.mjs    # Internal link & anchor checker
+├── .github/workflows/ci.yml  # Checks + poppler PDF scan + Pages deploy
+├── audit.md           # Full P0/P1/P2 audit + progress log
+├── open-questions.md  # Unconfirmed items awaiting the owner
 └── README.md
 ```
+
+> **Privacy:** the honours thesis PDF was removed because it contained a student number.
+> PDFs are only published after the redaction + `pdftotext`/`pdfinfo` check described below.
 
 ---
 
@@ -101,12 +110,42 @@ python3 -m http.server 8000
 
 All content lives in clearly-labelled data arrays near the top of `script.js`:
 
-- `PROJECTS` — add/edit project cards and their case studies.
-- `SKILLS` — add/edit skill categories and items.
-- `RESEARCH` — add/edit research topics.
-- `INTERESTS` — the interest tags in the About section.
+- `PROJECTS` — project cards + case studies. Each supports a `status` of `'verified'`
+  (Built & verified), `'partial'` (Partially built) or `'designed'` (Designed only),
+  plus a `statusDetail` string — this drives the honesty **Status** badge/block.
+- `DOCUMENTS` — the Documents table. Each row is `'gated'` (shows a "Request full report"
+  mailto) or `'available'` (shows View/Download for the `file`). A PDF should only be set
+  `'available'` **after** it has been privacy-checked (see below).
+- `SKILLS`, `RESEARCH`, `INTERESTS` — skills, research topics, About tags.
 
-Education, the hero and contact details are plain HTML in `index.html`.
+Education, hero, certifications and contact details are plain HTML in `index.html`.
+
+### How to add a project
+Add an object to `PROJECTS` with `id, title, date, category, type, desc, tech[], status,
+statusDetail, repo, icon, grad, study{…}`. Keep claims to what is actually built; use the
+right `status`. Mark anything unconfirmed with `[CONFIRM]` (CI will flag it).
+
+### How to add a PDF (privacy rule)
+1. **Redact first** — remove the student number and phone number from the PDF.
+2. **Verify** with poppler: `pdftotext -enc UTF-8 file.pdf - | grep -E '202038089|7663'`
+   and `pdfinfo -meta file.pdf` — there must be **no** matches. CI runs this automatically.
+3. Place the file under `docs/` (lowercase-hyphenated name) and set the matching
+   `DOCUMENTS` entry `status: 'available'` with the correct `file`, `pages` and `size`.
+4. Never publish the merged 84-page IDS/IPS+HomeLab file — publish the two source reports
+   separately.
+
+### How to add the CV
+Add a privacy-checked `CV.pdf` (no phone number) to the repo root. The CV section detects
+it automatically and shows Download/View buttons.
+
+### Checks (run locally before pushing)
+```bash
+node --check script.js
+node scripts/check-content.mjs       # fails on student/phone number; warns on [CONFIRM]
+node scripts/check-links.mjs index.html 404.html
+```
+CI (`.github/workflows/ci.yml`) runs these plus the authoritative poppler PDF scan, then
+deploys to GitHub Pages on `main`.
 
 ---
 

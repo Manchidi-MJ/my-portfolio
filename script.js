@@ -48,6 +48,9 @@ const PROJECTS = [
         type: 'Academic · Individual',
         desc: 'A reproducible big-data project: PySpark data engineering, RFM customer segmentation and leakage-aware machine-learning churn prediction — with an honest data-leakage audit as its key finding.',
         tech: ['Python', 'PySpark', 'Scikit-learn', 'Pandas', 'Jupyter'],
+        track: 'data',
+        status: 'verified',
+        statusDetail: 'Built and verified: reproducible pipeline, notebooks and a passing pytest suite (public repo).',
         repo: 'https://github.com/Manchidi-MJ/Big_Data_Challenge_Project',
         icon: 'fa-fire',
         grad: 'linear-gradient(135deg,#e0652f,#b5301f)',
@@ -70,6 +73,9 @@ const PROJECTS = [
         type: 'Personal · Competition entry',
         desc: 'Localises visual anomalies on manufactured surfaces with OpenCV 5, then runs an explicit agentic decision loop (re-inspect, pass, flag, or escalate to a human) with a full auditable decision trace.',
         tech: ['Python', 'OpenCV', 'FastAPI', 'Streamlit', 'AWS', 'Docker'],
+        track: 'data',
+        status: 'verified',
+        statusDetail: 'Built and verified: working pipeline, API/UI, AWS deploy config and a 27-test suite (public repo).',
         repo: 'https://github.com/Manchidi-MJ/inspectai-agentic-vision',
         icon: 'fa-robot',
         grad: 'linear-gradient(135deg,#4c8dff,#2f6fe0)',
@@ -92,6 +98,9 @@ const PROJECTS = [
         type: 'Personal',
         desc: 'A South-African-focused personal finance app (all amounts in ZAR) with a dashboard, transaction and budget management, account balances, goals, and interactive Plotly visualisations — built with Streamlit.',
         tech: ['Python', 'Streamlit', 'Plotly'],
+        track: 'data',
+        status: 'verified',
+        statusDetail: 'Built: runnable Streamlit application (public repo).',
         repo: 'https://github.com/Manchidi-MJ/css2026-finance_tracker_zar',
         icon: 'fa-wallet',
         grad: 'linear-gradient(135deg,#2bb673,#15925a)',
@@ -112,8 +121,10 @@ const PROJECTS = [
         date: '2025',
         category: 'ai',
         type: 'Academic · Honours research',
-        desc: 'Honours thesis evaluating supervised and unsupervised ML models for ransomware detection on public datasets (Malimg, Microsoft BIG 2015), reporting a best Random Forest accuracy of 99.34% on the evaluated data.',
+        desc: 'Honours thesis evaluating supervised and unsupervised ML models for ransomware detection on public datasets (Malimg, Microsoft BIG 2015). In my honours thesis, a Random Forest model achieved 99.34% accuracy on the evaluated dataset.',
         tech: ['Python', 'Scikit-learn', 'TensorFlow', 'Pandas'],
+        status: 'verified',
+        statusDetail: 'Honours research completed and written up (2025). Full thesis available on request.',
         repo: null,
         paper: null,
         icon: 'fa-virus-covid',
@@ -125,52 +136,58 @@ const PROJECTS = [
             contribution: 'Author of the honours research, experiments and write-up.',
             methodology: 'Trained and compared models on the Malimg and Microsoft BIG 2015 datasets, analysing accuracy and feature importance.',
             challenges: 'Handling malware datasets responsibly and interpreting model behaviour toward unseen variants.',
-            results: 'A best reported Random Forest accuracy of 99.34% on the evaluated data, with analysis of ensemble effectiveness and feature importance.',
+            results: 'In my honours thesis, a Random Forest model achieved 99.34% accuracy on the evaluated dataset, alongside analysis of ensemble effectiveness and feature importance. (Figures are as stated in the thesis; the full report is available on request.)',
             lessons: 'Ensemble methods performed strongly on these datasets; evaluating adaptability to zero-day variants remains an open, important challenge.'
         }
     },
     {
         id: 'ids',
-        title: 'Intrusion Detection & Prevention System (IDS/IPS)',
-        date: '2025',
+        title: 'Intrusion Detection & Prevention with Snort',
+        date: 'Oct 2025',
         category: 'security',
-        type: 'Academic · Lab project',
-        desc: 'Configured Snort on Ubuntu to monitor traffic between a Kali attacker and a Metasploitable target, with custom rules detecting and blocking ICMP, Telnet, FTP, SSH and port scans across IDS and IPS modes.',
-        tech: ['Snort', 'Ubuntu', 'Kali Linux', 'Metasploitable', 'VirtualBox'],
+        track: 'security',
+        type: 'Academic · Lab project (SCSE082)',
+        desc: 'Built a Snort IDS/IPS lab in VirtualBox (host-only 192.168.56.0/24): Kali attacker (192.168.56.5), Ubuntu Snort sensor (192.168.56.103) and Metasploitable 2 target, with custom rules for scans and well-known exploit signatures.',
+        tech: ['Snort', 'Ubuntu', 'Kali Linux', 'Metasploitable 2', 'VirtualBox'],
+        status: 'verified',
+        statusDetail: 'Built and verified in a controlled lab (SCSE082, Oct 2025).',
         repo: null,
         icon: 'fa-shield-halved',
         grad: 'linear-gradient(135deg,#ff6b6b,#d1374a)',
         study: {
-            overview: 'A hands-on network-security lab deploying Snort as both an intrusion detection and prevention system in a controlled virtual environment.',
-            problem: 'Detect and block common network attacks in a reproducible lab setting.',
-            objectives: ['Deploy Snort on Ubuntu', 'Write custom detection rules', 'Validate detection (IDS) and blocking (IPS) behaviour'],
-            contribution: 'Built the lab, authored the Snort rules and ran the attack/defence tests.',
-            methodology: 'Virtual network with Kali (attacker), Metasploitable (target) and Snort (sensor) in VirtualBox; custom rules for ICMP, Telnet, FTP, SSH and port scans.',
-            challenges: 'Tuning rules to reliably detect attacks while operating cleanly in inline IPS mode.',
-            results: 'Reliable detection of the tested attacks in IDS mode and successful blocking of malicious traffic in IPS mode within the lab.',
-            lessons: 'Signature design and placement are central to effective, low-noise intrusion detection and prevention.'
+            overview: 'A hands-on network-security lab deploying Snort as both an intrusion detection and prevention system in a controlled virtual environment (course SCSE082, October 2025).',
+            problem: 'Detect and, where possible, block common network attacks and known exploits in a reproducible, isolated lab.',
+            objectives: ['Stand up a host-only lab (192.168.56.0/24) in VirtualBox', 'Deploy a Snort sensor on Ubuntu', 'Write custom rules for scans and known exploit signatures', 'Compare IDS (alert) vs inline IPS (block) behaviour and tune false positives'],
+            contribution: 'Designed and built the lab, authored the Snort rules, ran the attack/defence tests and documented the findings.',
+            methodology: 'Topology: Kali attacker 192.168.56.5, Ubuntu Snort sensor 192.168.56.103, Metasploitable 2 target, on a VirtualBox host-only 192.168.56.0/24 network. Custom rules covered ICMP, Telnet, FTP, HTTP admin, SSH, r-services, the UnrealIRCd backdoor, an FTP backdoor exploit, and port scans.',
+            challenges: 'Controlling false positives: rule tuning and suppressions were required so that benign traffic did not trigger alerts, while still catching the intended attacks.',
+            results: 'Snort reliably recognised scripted scans and well-known exploit signatures; inline/IPS mode stopped some exploitation attempts. Rule tuning and suppressions were needed to keep false positives manageable. (Findings are limited to what was observed in the lab.)',
+            lessons: 'Signature design, sensor placement and tuning are central to effective, low-noise intrusion detection and prevention — a clean ruleset matters as much as the detections themselves.'
         }
     },
     {
         id: 'homelab',
-        title: 'Cybersecurity HomeLab (Virtual Enterprise)',
-        date: '2025',
+        title: 'Cybersecurity HomeLab (SME-style network)',
+        date: 'Jan–Jun 2025',
         category: 'security',
+        track: 'security',
         type: 'Personal · Lab project',
-        desc: 'A virtualised small-business network in VMware with a pfSense firewall, segmented networks (DMZ / corporate / security), an Active Directory domain controller, mixed endpoints and monitoring via Security Onion and Splunk.',
-        tech: ['VMware', 'pfSense', 'Windows Server', 'Active Directory', 'Security Onion', 'Splunk'],
+        desc: 'A segmented, SME-style virtual network. Built & verified: pfSense firewall, a Windows Server domain controller (AD DS, DNS, DHCP), a Kali workstation and Nessus vulnerability scanning. Further monitoring/DMZ components are designed / planned (see status).',
+        tech: ['pfSense', 'Windows Server', 'Active Directory', 'DNS', 'DHCP', 'Kali Linux', 'Nessus'],
+        status: 'partial',
+        statusDetail: 'Built & verified: pfSense (dashboard + admin), static IP/gateway config and ping tests, Windows Server roles (AD DS, DNS, DHCP, file services), AD user creation, and Nessus on Kali (incl. nessusd service troubleshooting). Designed / planned (not yet deployed): Security Onion, Splunk, Wazuh, DMZ web/mail servers, and an internal CA.',
         repo: null,
         icon: 'fa-network-wired',
         grad: 'linear-gradient(135deg,#1fa2b8,#157f9a)',
         study: {
-            overview: 'A self-built lab simulating an enterprise IT environment for security testing and monitoring.',
-            problem: 'Create a realistic, segmented enterprise network to practise defence, monitoring and incident analysis.',
-            objectives: ['Deploy pfSense with DMZ/corporate/security segments', 'Stand up Active Directory and endpoints', 'Add monitoring with Security Onion and Splunk'],
-            contribution: 'Designed and deployed the full virtual environment and monitoring stack.',
-            methodology: 'VMware Workstation hosting segmented networks, a domain controller, Windows/Linux endpoints and SIEM/monitoring tools.',
-            challenges: 'Configuring network segmentation and integrating monitoring tools into a coherent, observable environment.',
-            results: 'A functioning virtual enterprise environment suitable for security testing and hands-on monitoring practice.',
-            lessons: 'Hands-on labs build practical intuition for segmentation, directory services and security monitoring that theory alone cannot.'
+            overview: 'A self-built lab simulating a small-business (SME) IT environment, used to practise network defence and administration. Core services are built and verified; a monitoring/DMZ layer is designed but not yet deployed.',
+            problem: 'Create a realistic, segmented SME network to practise firewalling, directory services and vulnerability assessment.',
+            objectives: ['Deploy a pfSense firewall with segmented networking', 'Stand up a Windows Server domain controller (AD DS, DNS, DHCP)', 'Add a Kali workstation and run Nessus vulnerability scans', 'Design a monitoring/DMZ layer for a future phase'],
+            contribution: 'Designed the network and deployed the verified components: pfSense, the Windows Server domain controller and its roles, the Kali workstation and Nessus.',
+            methodology: 'Virtualised SME network: pfSense firewall (static IP/gateway, verified by dashboard access and ping tests), Windows Server with AD DS/DNS/DHCP/file services and created AD users, and a Kali workstation running Nessus (including nessusd service troubleshooting).',
+            challenges: 'Getting the Nessus service (nessusd) running reliably on Kali, and configuring addressing/gateway so segments routed correctly.',
+            results: 'A verified core: a working pfSense firewall, a functioning AD domain controller with DNS/DHCP and users, and Nessus scanning from Kali. The SIEM/monitoring and DMZ layer (Security Onion, Splunk, Wazuh, DMZ servers, internal CA) is designed but NOT yet deployed, and no detection/remediation results are claimed for it.',
+            lessons: 'Standing up directory services, firewalling and vulnerability scanning end-to-end builds practical intuition that theory alone cannot — and being explicit about what is built vs planned keeps the work honest.'
         }
     },
     {
@@ -181,6 +198,9 @@ const PROJECTS = [
         type: 'Academic',
         desc: 'Designed and implemented secure database systems with Python, MySQL and PostgreSQL — focusing on secure storage, query optimisation and reliability, with testing and debugging throughout.',
         tech: ['Python', 'MySQL', 'PostgreSQL'],
+        track: 'data',
+        status: 'verified',
+        statusDetail: 'Academic coursework; source not public. [CONFIRM] exact scope/results before adding specific metrics.',
         repo: null,
         icon: 'fa-database',
         grad: 'linear-gradient(135deg,#4c8dff,#1fa2b8)',
@@ -203,6 +223,9 @@ const PROJECTS = [
         type: 'Personal',
         desc: 'A web-based analytics dashboard concept for retail sales data, using interactive charts and filtering to surface insights into sales trends, customer behaviour and product performance.',
         tech: ['HTML', 'CSS', 'JavaScript', 'Data Visualisation'],
+        track: 'data',
+        status: 'designed',
+        statusDetail: 'Designed / planned: a concept and README; implementation not yet built out (public repo).',
         repo: 'https://github.com/Manchidi-MJ/data-analysis-dashboard',
         icon: 'fa-chart-pie',
         grad: 'linear-gradient(135deg,#e8b64c,#c9922c)',
@@ -225,6 +248,9 @@ const PROJECTS = [
         type: 'Academic · Group',
         desc: 'Team analysis of datasets with R and Python, applying regression and statistical-modelling techniques to find patterns and produce predictive insights, communicated through structured reports and visualisations.',
         tech: ['R', 'Python', 'Statistical Modelling'],
+        track: 'data',
+        status: 'verified',
+        statusDetail: 'Academic group project; source not public. [CONFIRM] exact scope/results before adding specific metrics.',
         repo: null,
         icon: 'fa-square-root-variable',
         grad: 'linear-gradient(135deg,#7a5cff,#4c8dff)',
@@ -243,10 +269,25 @@ const PROJECTS = [
 
 const RESEARCH = [
     { title: 'Mobile Edge Computing (MEC)', desc: 'Investigated the Mobile Edge Computing paradigm — its benefits, challenges and use cases for latency-sensitive applications such as autonomous vehicles and smart manufacturing — and considered security and resource-management angles.', tags: ['Edge Computing', '5G', 'IoT'] },
-    { title: 'Inadequate Post-Attack Procedures in Cybersecurity', desc: 'Examined the importance of post-attack procedures, identified common gaps in incident response and discussed practices for more effective recovery and organisational resilience.', tags: ['Incident Response', 'Forensics', 'Recovery'] },
+    { title: 'Inadequate Post-Attack Procedures in Cybersecurity', desc: 'A research report (with presentation) examining the importance of post-attack procedures, common gaps in incident response, and practices for more effective recovery and organisational resilience. The “XYZ Corp” breach used throughout is an illustrative scenario, not a real incident; figures are those stated in the report.', tags: ['Illustrative scenario', 'Incident Response', 'Recovery'] },
     { title: 'Cybersecurity HomeLab Implementation', desc: 'Documented building a cybersecurity homelab simulating a small-business network with pfSense, Active Directory and security-monitoring tooling.', tags: ['pfSense', 'Active Directory', 'SIEM'] },
     { title: 'IDS/IPS Configuration with Snort', desc: 'Developed and tested custom Snort rules for detecting and preventing network attacks in a controlled virtual lab.', tags: ['Snort', 'Kali Linux', 'Metasploitable'] }
 ];
+
+/* DOCUMENTS — reports/PDFs. Each entry is either:
+   - status 'available': a redacted/clean PDF exists at `file` → View + Download.
+   - status 'gated': no publishable (redacted) copy yet → "Request full report" mailto.
+   Filenames are lowercase-hyphenated and expected in the repo root once supplied.
+   NOTE: the merged 84-page IDS/IPS+Homelab PDF must NOT be published; publish the two
+   source reports separately (per Magaseng's instruction). */
+const DOCUMENTS = [
+    { title: 'IDS/IPS with Snort — report', course: 'SCSE082', date: 'Oct 2025', pages: 66, size: '—', status: 'gated', file: 'docs/ids-ips-snort-report.pdf' },
+    { title: 'Cybersecurity HomeLab — report', course: 'Project', date: '2025', pages: 18, size: '—', status: 'gated', file: 'docs/cybersecurity-homelab-report.pdf' },
+    { title: 'Evaluating ML for Adaptive Ransomware Detection (Honours thesis)', course: 'Honours', date: '2025', pages: '—', size: '—', status: 'gated', file: 'docs/honours-thesis-ransomware.pdf' },
+    { title: 'Inadequate Post-Attack Procedures — research report', course: 'Research', date: 'Oct 2025', pages: '—', size: '—', status: 'gated', file: 'docs/post-attack-procedures-report.pdf' },
+    { title: 'Mobile Edge Computing — research assignment', course: 'Research', date: '2025', pages: '—', size: '—', status: 'gated', file: 'docs/mobile-edge-computing-assignment.pdf' }
+];
+const REQUEST_EMAIL = 'johnmanchidi@gmail.com';
 
 const PROJECT_CATS = [
     { key: 'all', label: 'All' },
@@ -257,6 +298,19 @@ const PROJECT_CATS = [
     { key: 'database', label: 'Databases' },
     { key: 'security', label: 'Cybersecurity' }
 ];
+
+/* Honesty status — separates what is actually built from what is only designed.
+   Keys map to the `status` field on each PROJECTS entry. */
+const STATUS_META = {
+    verified: { label: 'Built & verified', icon: 'fa-circle-check', cls: 'st-verified' },
+    partial:  { label: 'Partially built',  icon: 'fa-circle-half-stroke', cls: 'st-partial' },
+    designed: { label: 'Designed only',    icon: 'fa-pen-ruler', cls: 'st-designed' }
+};
+function statusBadge(status) {
+    const m = STATUS_META[status];
+    if (!m) return '';
+    return `<span class="status-badge ${m.cls}"><i class="fas ${m.icon}" aria-hidden="true"></i> ${m.label}</span>`;
+}
 
 /* ---------------------------------------------------------
    LOADER
@@ -491,7 +545,7 @@ const projectUI = (function projects() {
             </div>
             <div class="project-body">
                 <h3>${esc(p.title)}</h3>
-                <span class="project-date">${esc(p.date)}</span>
+                <div class="project-sub"><span class="project-date">${esc(p.date)}</span>${statusBadge(p.status)}</div>
                 <p class="project-desc">${esc(p.desc)}</p>
                 <div class="project-tags">${p.tech.map(t => `<span>${esc(t)}</span>`).join('')}</div>
                 <div class="project-foot">
@@ -564,9 +618,10 @@ function openCaseStudy(id) {
     body.innerHTML = `
         <div class="modal-head">
             <h3 id="modalTitle">${esc(p.title)}</h3>
-            <p class="m-meta">${esc(p.type)} · ${esc(p.date)}</p>
+            <p class="m-meta">${esc(p.type)} · ${esc(p.date)} ${statusBadge(p.status)}</p>
         </div>
         <div style="padding:32px">
+            ${p.status ? block('fa-clipboard-check', 'Status', `<p><strong>${esc(STATUS_META[p.status] ? STATUS_META[p.status].label : p.status)}.</strong> ${esc(p.statusDetail || '')}</p>`) : ''}
             ${block('fa-circle-info', 'Overview', `<p>${esc(s.overview)}</p>`)}
             ${block('fa-bullseye', 'Problem statement', `<p>${esc(s.problem)}</p>`)}
             ${block('fa-list-check', 'Objectives', list(s.objectives))}
@@ -609,6 +664,34 @@ function closeModal() {
             <p>${r.desc}</p>
             <div class="tag-row">${r.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
         </div>`).join('');
+})();
+
+/* ---------------------------------------------------------
+   DOCUMENTS TABLE
+--------------------------------------------------------- */
+(function documents() {
+    const body = $('#docsBody');
+    if (!body) return;
+    const esc = s => String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+    body.innerHTML = DOCUMENTS.map(d => {
+        let access;
+        if (d.status === 'available' && d.file) {
+            access = `<a class="doc-link" href="${esc(d.file)}" target="_blank" rel="noopener"><i class="fas fa-eye" aria-hidden="true"></i> View</a>
+                      <a class="doc-link" href="${esc(d.file)}" download><i class="fas fa-download" aria-hidden="true"></i> Download</a>`;
+        } else {
+            const subject = encodeURIComponent('Request for full report: ' + d.title);
+            const mailBody = encodeURIComponent('Hi Magaseng,\n\nPlease could you share the full report: "' + d.title + '".\n\nThanks.');
+            access = `<a class="doc-link request" href="mailto:${REQUEST_EMAIL}?subject=${subject}&body=${mailBody}"><i class="fas fa-envelope" aria-hidden="true"></i> Request full report</a>`;
+        }
+        return `<tr>
+            <td data-th="Title">${esc(d.title)}</td>
+            <td data-th="Course">${esc(d.course)}</td>
+            <td data-th="Date">${esc(d.date)}</td>
+            <td data-th="Pages">${esc(d.pages)}</td>
+            <td data-th="Size">${esc(d.size)}</td>
+            <td data-th="Access" class="doc-access">${access}</td>
+        </tr>`;
+    }).join('');
 })();
 
 /* ---------------------------------------------------------
@@ -760,6 +843,8 @@ function closeModal() {
         { label: 'Skills', sub: 'Section', icon: 'fa-screwdriver-wrench', action: () => go('#skills') },
         { label: 'Projects', sub: 'Section', icon: 'fa-layer-group', action: () => go('#projects') },
         { label: 'Research', sub: 'Section', icon: 'fa-flask', action: () => go('#research') },
+        { label: 'Certifications', sub: 'Section', icon: 'fa-certificate', action: () => go('#certifications') },
+        { label: 'Documents', sub: 'Section', icon: 'fa-file-pdf', action: () => go('#documents') },
         { label: 'GitHub section', sub: 'Section', icon: 'fa-code-branch', action: () => go('#github') },
         { label: 'CV', sub: 'Section', icon: 'fa-file-lines', action: () => go('#cv') },
         { label: 'Contact', sub: 'Section', icon: 'fa-envelope', action: () => go('#contact') },
