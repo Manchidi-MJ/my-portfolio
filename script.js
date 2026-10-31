@@ -115,7 +115,7 @@ const PROJECTS = [
         desc: 'Honours thesis evaluating supervised and unsupervised ML models for ransomware detection on public datasets (Malimg, Microsoft BIG 2015), reporting a best Random Forest accuracy of 99.34% on the evaluated data.',
         tech: ['Python', 'Scikit-learn', 'TensorFlow', 'Pandas'],
         repo: null,
-        paper: 'Research Paper.pdf',
+        paper: null,
         icon: 'fa-virus-covid',
         grad: 'linear-gradient(135deg,#7a5cff,#5a3fd6)',
         study: {
