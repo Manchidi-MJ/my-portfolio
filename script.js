@@ -42,6 +42,7 @@ const SKILLS = [
 const PROJECTS = [
     {
         id: 'bigdata',
+        featured: true,
         title: 'E-Commerce Customer Churn & Big Data Analytics',
         date: '2026',
         category: 'data-eng',
@@ -120,6 +121,7 @@ const PROJECTS = [
         title: 'ML for Adaptive Ransomware Detection (Honours)',
         date: '2025',
         category: 'ai',
+        track: 'security',
         type: 'Academic · Honours research',
         desc: 'Honours thesis evaluating supervised and unsupervised ML models for ransomware detection on public datasets (Malimg, Microsoft BIG 2015). In my honours thesis, a Random Forest model achieved 99.34% accuracy on the evaluated dataset.',
         tech: ['Python', 'Scikit-learn', 'TensorFlow', 'Pandas'],
@@ -142,6 +144,7 @@ const PROJECTS = [
     },
     {
         id: 'ids',
+        featured: true,
         title: 'Intrusion Detection & Prevention with Snort',
         date: 'Oct 2025',
         category: 'security',
@@ -167,6 +170,7 @@ const PROJECTS = [
     },
     {
         id: 'homelab',
+        featured: true,
         title: 'Cybersecurity HomeLab (SME-style network)',
         date: 'Jan–Jun 2025',
         category: 'security',
@@ -289,14 +293,11 @@ const DOCUMENTS = [
 ];
 const REQUEST_EMAIL = 'johnmanchidi@gmail.com';
 
+/* Two career tracks + All. Filtering is by `track`, not fine-grained category. */
 const PROJECT_CATS = [
     { key: 'all', label: 'All' },
-    { key: 'data-eng', label: 'Data Engineering' },
-    { key: 'ai', label: 'AI / ML' },
-    { key: 'data-sci', label: 'Data Science' },
-    { key: 'software', label: 'Software' },
-    { key: 'database', label: 'Databases' },
-    { key: 'security', label: 'Cybersecurity' }
+    { key: 'security', label: 'Security' },
+    { key: 'data', label: 'Data' }
 ];
 
 /* Honesty status — separates what is actually built from what is only designed.
@@ -526,11 +527,18 @@ const projectUI = (function projects() {
     function esc(s) { return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
 
     function matches(p) {
-        const catOk = activeCat === 'all' || p.category === activeCat;
-        if (!catOk) return false;
+        const trackOk = activeCat === 'all' || p.track === activeCat;
+        if (!trackOk) return false;
         if (!query) return true;
         const hay = (p.title + ' ' + p.desc + ' ' + p.tech.join(' ') + ' ' + p.type).toLowerCase();
         return hay.includes(query);
+    }
+
+    // Featured first, then most recent. Dates may be '2026', 'Oct 2025', 'Jan–Jun 2025'.
+    function sortYear(d) { const m = String(d).match(/\d{4}/g); return m ? Math.max(...m.map(Number)) : 0; }
+    function byFeaturedThenDate(a, b) {
+        if (!!b.featured - !!a.featured) return (!!b.featured) - (!!a.featured);
+        return sortYear(b.date) - sortYear(a.date);
     }
 
     function card(p) {
@@ -541,6 +549,7 @@ const projectUI = (function projects() {
         <article class="project-card" data-id="${p.id}" tabindex="0" role="button" aria-label="Open case study: ${esc(p.title)}">
             <div class="project-thumb" style="background:${p.grad}">
                 <i class="fas ${p.icon}" aria-hidden="true"></i>
+                ${p.featured ? '<span class="featured-ribbon"><i class="fas fa-star" aria-hidden="true"></i> Featured</span>' : ''}
                 <span class="cat-label">${esc(p.type)}</span>
             </div>
             <div class="project-body">
@@ -557,7 +566,7 @@ const projectUI = (function projects() {
     }
 
     function render() {
-        const list = PROJECTS.filter(matches);
+        const list = PROJECTS.filter(matches).sort(byFeaturedThenDate);
         grid.innerHTML = list.map(card).join('');
         if (empty) empty.hidden = list.length !== 0;
         observeReveals();

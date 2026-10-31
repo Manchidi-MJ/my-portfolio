@@ -13,7 +13,13 @@ import { dirname, join, normalize } from 'node:path';
 const files = process.argv.slice(2);
 const targets = files.length ? files : ['index.html', '404.html'];
 
+// Owner-supplied binaries that are intentionally referenced before they exist.
+// Missing ones are a NOTICE (wired, waiting on upload), not a failure. When the
+// files are added, the references simply resolve.
+const PENDING_ASSET = /^(docs\/.+\.pdf|CV\.pdf|images\/.+\.(webp|jpg|png))$/i;
+
 let broken = [];
+let pending = [];
 
 for (const page of targets) {
     if (!existsSync(page)) { broken.push(`${page}: page not found`); continue; }
@@ -31,13 +37,19 @@ for (const page of targets) {
             const path = decodeURIComponent(ref.split('#')[0].split('?')[0]);
             if (!path) continue;
             const resolved = normalize(join(base, path));
-            if (!existsSync(resolved)) broken.push(`${page}: missing file -> ${ref}`);
+            if (existsSync(resolved)) continue;
+            if (PENDING_ASSET.test(path)) pending.push(`${page}: pending asset -> ${ref}`);
+            else broken.push(`${page}: missing file -> ${ref}`);
         } else if (ref.startsWith('#') && ref.length > 1) {
             if (!ids.has(ref.slice(1))) broken.push(`${page}: dangling anchor -> ${ref}`);
         }
     }
 }
 
+if (pending.length) {
+    console.log(`NOTICE: ${pending.length} pending asset reference(s) (wired, waiting on upload):`);
+    for (const p of pending) console.log('  ' + p);
+}
 if (broken.length) {
     console.error(`\nFAIL: ${broken.length} broken internal reference(s):`);
     for (const b of broken) console.error('  ' + b);

@@ -162,10 +162,10 @@
                         <div class="portrait-ring" aria-hidden="true"></div>
                     </div>
                     <div class="hero-badges" aria-hidden="true">
+                        <span class="chip"><i class="fas fa-shield-halved"></i> Snort IDS/IPS</span>
+                        <span class="chip"><i class="fas fa-network-wired"></i> pfSense</span>
+                        <span class="chip"><i class="fas fa-chart-line"></i> SQL &amp; Excel</span>
                         <span class="chip"><i class="fab fa-python"></i> Python</span>
-                        <span class="chip"><i class="fas fa-fire"></i> PySpark</span>
-                        <span class="chip"><i class="fas fa-brain"></i> AI / ML</span>
-                        <span class="chip"><i class="fas fa-database"></i> Data</span>
                     </div>
                 </div>
             </div>
@@ -336,11 +336,6 @@
                 </article>
 
                 <div class="research-grid" id="researchGrid"></div>
-                <p class="section-note">
-                    <i class="fas fa-circle-info" aria-hidden="true"></i>
-                    This section is structured to grow. Future publications, conference presentations and technical
-                    reports can be added as they become available.
-                </p>
             </div>
         </section>
 
@@ -349,28 +344,21 @@
             <div class="wrap">
                 <p class="kicker">Certifications</p>
                 <h2 class="section-title" id="cert-title">Courses &amp; <span class="accent">certifications</span></h2>
-                <p class="section-lead">
-                    Completed training and certification programmes. Issue dates and credential links will be added once
-                    confirmed.
-                </p>
                 <div class="cert-grid">
                     <article class="cert-card reveal">
                         <i class="fas fa-certificate cert-ico" aria-hidden="true"></i>
                         <h3>Cisco Cybersecurity Essentials</h3>
                         <p class="cert-org">Cisco Networking Academy</p>
-                        <p class="cert-pending"><i class="fas fa-circle-info" aria-hidden="true"></i> Date &amp; credential link to be added</p>
                     </article>
                     <article class="cert-card reveal">
                         <i class="fas fa-certificate cert-ico" aria-hidden="true"></i>
                         <h3>Cisco Data Science Essentials</h3>
                         <p class="cert-org">Cisco Networking Academy</p>
-                        <p class="cert-pending"><i class="fas fa-circle-info" aria-hidden="true"></i> Date &amp; credential link to be added</p>
                     </article>
                     <article class="cert-card reveal">
                         <i class="fas fa-certificate cert-ico" aria-hidden="true"></i>
                         <h3>CHPC Programme</h3>
                         <p class="cert-org">NITheCS (National Institute for Theoretical and Computational Sciences)</p>
-                        <p class="cert-pending"><i class="fas fa-circle-info" aria-hidden="true"></i> Date &amp; credential link to be added</p>
                     </article>
                 </div>
             </div>
@@ -382,13 +370,22 @@
                 <p class="kicker">Documents</p>
                 <h2 class="section-title" id="docs-title">Reports &amp; <span class="accent">documents</span></h2>
                 <p class="section-lead">
-                    Final versions of my project and research reports. To protect personal information, reports are
-                    shared on request until redacted copies (student number removed) are published here.
+                    Reports are shared as PDFs; the full thesis is available on request.
                 </p>
+                <noscript>
+                    <ul class="docs-noscript">
+                        <li><a href="docs/ids-ips-snort-report.pdf">IDS/IPS with Snort — report (PDF)</a></li>
+                        <li><a href="docs/cybersecurity-homelab-report.pdf">Cybersecurity HomeLab — report (PDF)</a></li>
+                        <li><a href="docs/post-attack-procedures-report.pdf">Inadequate Post-Attack Procedures — report (PDF)</a></li>
+                        <li><a href="docs/mobile-edge-computing-assignment.pdf">Mobile Edge Computing — research assignment (PDF)</a></li>
+                        <li><a href="CV.pdf">Curriculum Vitae (PDF)</a></li>
+                    </ul>
+                </noscript>
                 <div class="docs-table-wrap">
                     <table class="docs-table" id="docsTable" aria-label="Project and research documents">
                         <thead>
                             <tr>
+                                <th scope="col" class="docs-thumb-col">Preview</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Course</th>
                                 <th scope="col">Date</th>
@@ -400,11 +397,6 @@
                         <tbody id="docsBody"></tbody>
                     </table>
                 </div>
-                <p class="section-note">
-                    <i class="fas fa-shield-halved" aria-hidden="true"></i>
-                    Draft files are excluded; only final versions are listed. PDFs are published only after they have been
-                    checked (with <code>pdftotext</code>/<code>pdfinfo</code>) to confirm no student or phone number remains.
-                </p>
             </div>
         </section>
 

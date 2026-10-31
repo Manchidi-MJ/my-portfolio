@@ -547,3 +547,14 @@ footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 
     .docs-table td:first-child::before { display: block; margin-bottom: 4px; color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
     .doc-access { justify-content: flex-end; }
 }
+
+/* ===== Featured project ribbon ===== */
+.featured-ribbon {
+    position: absolute; top: 12px; left: 12px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.4px;
+    padding: 4px 10px; border-radius: 50px;
+    background: var(--gold); color: #0b1220;
+}
+.featured-ribbon i { font-size: 0.68rem; }
+.project-thumb { position: relative; }
