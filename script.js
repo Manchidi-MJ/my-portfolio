@@ -410,26 +410,6 @@ function statusBadge(status) {
 })();
 
 /* ---------------------------------------------------------
-   HERO ROTATOR (typing effect, reduced-motion aware)
---------------------------------------------------------- */
-(function rotator() {
-    const el = $('#rotator');
-    if (!el) return;
-    const words = ['Data Engineering', 'Software Development', 'Machine Learning', 'Data Science', 'Cloud & Cybersecurity', 'Technology Research'];
-    if (prefersReduced) { el.textContent = words[0]; return; }
-    let w = 0, c = 0, deleting = false;
-    (function tick() {
-        const word = words[w];
-        c += deleting ? -1 : 1;
-        el.textContent = word.slice(0, c);
-        let delay = deleting ? 55 : 110;
-        if (!deleting && c === word.length) { deleting = true; delay = 1600; }
-        else if (deleting && c === 0) { deleting = false; w = (w + 1) % words.length; delay = 350; }
-        setTimeout(tick, delay);
-    })();
-})();
-
-/* ---------------------------------------------------------
    INTERESTS + SKILLS
 --------------------------------------------------------- */
 (function interests() {
@@ -866,14 +846,10 @@ function closeModal() {
     const COMMANDS = [
         { label: 'Home', sub: 'Section', icon: 'fa-house', action: () => go('#home') },
         { label: 'About', sub: 'Section', icon: 'fa-user', action: () => go('#about') },
-        { label: 'What I bring', sub: 'Section', icon: 'fa-star', action: () => go('#services') },
-        { label: 'Education', sub: 'Section', icon: 'fa-graduation-cap', action: () => go('#education') },
-        { label: 'Skills', sub: 'Section', icon: 'fa-screwdriver-wrench', action: () => go('#skills') },
+        { label: 'Skills & certifications', sub: 'Section', icon: 'fa-screwdriver-wrench', action: () => go('#skills') },
         { label: 'Projects', sub: 'Section', icon: 'fa-layer-group', action: () => go('#projects') },
         { label: 'Research', sub: 'Section', icon: 'fa-flask', action: () => go('#research') },
-        { label: 'Certifications', sub: 'Section', icon: 'fa-certificate', action: () => go('#certifications') },
         { label: 'Documents', sub: 'Section', icon: 'fa-file-pdf', action: () => go('#documents') },
-        { label: 'GitHub section', sub: 'Section', icon: 'fa-code-branch', action: () => go('#github') },
         { label: 'CV', sub: 'Section', icon: 'fa-file-lines', action: () => go('#cv') },
         { label: 'Contact', sub: 'Section', icon: 'fa-envelope', action: () => go('#contact') },
         { label: 'Open GitHub profile', sub: 'External', icon: 'fa-github', ext: true, action: () => window.open('https://github.com/Manchidi-MJ', '_blank', 'noopener') },
