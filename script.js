@@ -817,14 +817,21 @@ function closeModal() {
             const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
             const data = await res.json().catch(() => ({}));
             if (res.ok && data.success !== false) {
-                status.textContent = '✓ Thank you! Your message has been sent.';
+                status.textContent = '✓ Thank you! Your message has been sent. I’ll reply by email soon.';
                 status.className = 'form-status ok';
                 form.reset();
             } else {
                 throw new Error(data.message || 'send failed');
             }
         } catch {
-            status.textContent = 'Something went wrong. Please email johnmanchidi@gmail.com directly.';
+            // Build a prefilled mailto so a failed send still reaches me.
+            const subj = encodeURIComponent((form.subject && form.subject.value) || 'Portfolio enquiry');
+            const bodyText = encodeURIComponent(
+                ((form.message && form.message.value) || '') +
+                '\n\n— ' + ((form.name && form.name.value) || '') + ' (' + ((form.email && form.email.value) || '') + ')'
+            );
+            status.innerHTML = 'Sorry — the form couldn’t send. Please ' +
+                '<a href="mailto:johnmanchidi@gmail.com?subject=' + subj + '&body=' + bodyText + '">email me directly</a>.';
             status.className = 'form-status err';
         } finally {
             submit.classList.remove('loading'); submit.disabled = false;

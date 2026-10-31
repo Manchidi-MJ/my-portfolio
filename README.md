@@ -100,7 +100,7 @@ python3 -m http.server 8000
 | Item | Status | How to enable |
 |------|--------|---------------|
 | **CV download** | Not yet added | Drop a `CV.pdf` in the repo root. The CV section detects it automatically and shows a download button; until then it shows a clear "coming soon" placeholder. |
-| **Contact form** | Working | Uses an existing Web3Forms access key (a public, client-side key by design). Messages go to the configured inbox. To use your own, replace the `access_key` value in the contact form in `index.html`. |
+| **Contact form** | Working | Uses a Web3Forms access key (a public, client-side key by design). Messages go to the configured inbox; on failure the status shows a prefilled **mailto** fallback. To use your own, replace the `access_key` value in `index.html`. **Security:** in the Web3Forms dashboard, restrict the access key to the portfolio domain (`manchidi-mj.github.io`) so it can't be reused from other sites. |
 | **Canonical / OG URLs** | Set to GitHub Pages URL | If you move to a custom domain, update the `canonical`, Open Graph and `sitemap.xml`/`robots.txt` URLs. |
 | **Analytics** | Not included | No tracking scripts are bundled (privacy-first). If you later add privacy-friendly analytics (e.g. a consent-aware, cookieless provider), document it and add a short privacy note. |
 
