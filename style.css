@@ -481,3 +481,28 @@ footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 
     .js-reveal .reveal { opacity: 1; transform: none; }
     .portrait-ring { display: none; }
 }
+
+/* ===== Step 1 additions: hero "what I'm looking for" + honesty status badges ===== */
+.hero-looking {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin: -6px 0 26px; max-width: 580px;
+    color: var(--text-muted); font-size: 0.95rem;
+}
+.hero-looking i { color: var(--gold); margin-top: 3px; }
+.hero-looking strong { color: var(--text); }
+
+.project-sub { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.project-sub .project-date { margin-bottom: 0; }
+
+.status-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.3px;
+    padding: 3px 10px; border-radius: 50px; border: 1px solid var(--border);
+    white-space: nowrap;
+}
+.status-badge i { font-size: 0.72rem; }
+.status-badge.st-verified { color: #46d39a; border-color: rgba(70, 211, 154, 0.45); background: rgba(70, 211, 154, 0.10); }
+.status-badge.st-partial  { color: #e8b64c; border-color: rgba(232, 182, 76, 0.45); background: rgba(232, 182, 76, 0.10); }
+.status-badge.st-designed { color: #8fa6d8; border-color: rgba(143, 166, 216, 0.45); background: rgba(143, 166, 216, 0.10); }
+
+.m-meta .status-badge { margin-left: 6px; }
