@@ -594,6 +594,7 @@ const projectUI = (function projects() {
    CASE STUDY MODAL
 --------------------------------------------------------- */
 let lastFocused = null;
+let suppressHash = false;
 function openCaseStudy(id) {
     const p = PROJECTS.find(x => x.id === id);
     const overlay = $('#projectModal');
@@ -631,19 +632,44 @@ function openCaseStudy(id) {
     document.body.style.overflow = 'hidden';
     lastFocused = document.activeElement;
     $('#modalClose').focus();
+
+    // Reflect the open case study in the URL hash so it is shareable / Back-able.
+    const hash = '#project-' + id;
+    if (location.hash !== hash) {
+        suppressHash = true;
+        history.pushState({ project: id }, '', hash);
+        suppressHash = false;
+    }
 }
-function closeModal() {
+function closeModal(fromHash) {
     const overlay = $('#projectModal');
     if (!overlay || overlay.hidden) return;
     overlay.hidden = true;
     document.body.style.overflow = '';
     if (lastFocused) lastFocused.focus();
+    // Drop the #project-* hash unless the close was itself driven by a hash change.
+    if (!fromHash && /^#project-/.test(location.hash)) {
+        suppressHash = true;
+        history.pushState('', '', location.pathname + location.search);
+        suppressHash = false;
+    }
 }
 (function modalEvents() {
     const overlay = $('#projectModal');
     if (!overlay) return;
-    $('#modalClose').addEventListener('click', closeModal);
+    $('#modalClose').addEventListener('click', () => closeModal());
     overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+    // Open/close from the hash: deep links, Back/Forward, and initial load.
+    function syncFromHash() {
+        if (suppressHash) return;
+        const m = location.hash.match(/^#project-([\w-]+)$/);
+        if (m && PROJECTS.some(p => p.id === m[1])) openCaseStudy(m[1]);
+        else closeModal(true);
+    }
+    window.addEventListener('hashchange', syncFromHash);
+    // Restore on load (after projects render).
+    syncFromHash();
 })();
 
 /* ---------------------------------------------------------
