@@ -127,8 +127,9 @@ right `status`. Mark anything unconfirmed with `[CONFIRM]` (CI will flag it).
 
 ### How to add a PDF (privacy rule)
 1. **Redact first** — remove the student number and phone number from the PDF.
-2. **Verify** with poppler: `pdftotext -enc UTF-8 file.pdf - | grep -E '202038089|7663'`
-   and `pdfinfo -meta file.pdf` — there must be **no** matches. CI runs this automatically.
+2. **Verify** the PDF contains neither the student number nor the phone number, using
+   `pdftotext`, `pdfinfo` and `strings` (the exact regexes live in `scripts/check-content.mjs`,
+   the single source of truth). CI runs this automatically on every PDF — see the workflow.
 3. Place the file under `docs/` (lowercase-hyphenated name) and set the matching
    `DOCUMENTS` entry `status: 'available'` with the correct `file`, `pages` and `size`.
 4. Never publish the merged 84-page IDS/IPS+HomeLab file — publish the two source reports

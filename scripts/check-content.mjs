@@ -18,20 +18,17 @@ import { join, extname } from 'node:path';
 const ROOT = process.cwd();
 const STRICT = process.argv.includes('--strict') || process.env.CONTENT_CHECK_STRICT === '1';
 
-const TEXT_EXT = new Set(['.html', '.css', '.js', '.mjs', '.json', '.xml', '.txt', '.yml', '.yaml', '.svg']);
+const TEXT_EXT = new Set(['.html', '.css', '.js', '.mjs', '.json', '.xml', '.txt', '.yml', '.yaml', '.svg', '.md']);
 const SKIP_DIRS = new Set(['.git', 'node_modules', '.github']);
 
-// Documentation that intentionally *describes* the forbidden values (the audit,
-// the open-questions log and the README's privacy instructions). These are not
-// shipped site content, so they are exempt from the privacy scan. All other
-// files — including every .html/.css/.js that renders the site — are scanned.
-// NOTE: .md is deliberately omitted from TEXT_EXT so docs aren't scanned; if you
-// add Markdown that becomes *published content*, scan it explicitly instead.
-const SKIP_FILES = new Set(['audit.md', 'open-questions.md', 'README.md']);
+// Every tracked text file is scanned, Markdown included — there are no per-file
+// exemptions. This checker excludes only itself (it necessarily contains the
+// regexes). Source of truth for the forbidden regexes used by CI and build.mjs.
+const SKIP_FILES = new Set();
 
 // Hard-fail patterns. Phone variants cover spacing, +27 vs 0, and bare digits.
-const FORBIDDEN = [
-    { name: 'student number (202038089)', re: /202038089/ },
+export const FORBIDDEN = [
+    { name: 'student number', re: /202038089/ },
     { name: 'phone number', re: /(\+?27|0)\s*6?8[\s.-]*187[\s.-]*7663|681877663/ }
 ];
 

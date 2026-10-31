@@ -20,14 +20,14 @@
 
 ### ✅ P0-PRIV-1 — Student number exposed in published thesis PDF — **FIXED (PR #5, merged)**
 - **File:** `Research Paper.pdf` (now removed from repo).
-- **Finding:** The honours thesis contained the student number **`202038089`** in the file bytes (raw-byte scan: 2 occurrences) and was directly linked/downloadable from the live site.
+- **Finding:** The honours thesis contained the student number in the file bytes (raw-byte scan: 2 occurrences) and was directly linked/downloadable from the live site.
 - **Nuance (honest):** A stdlib text-layer extraction found **0** occurrences in the *rendered text* — the number appears to live in metadata or an uncompressed object rather than body text, but it is still extractable from the file and therefore a real exposure.
 - **Fix applied:** removed the PDF from the repo; replaced the "Read the paper" link with a **"Request full report"** mailto; set `paper: null` on the project card; bumped cache-bust version.
 - **Still open (needs you):** the PDF remains in **git history** (you asked me *not* to rewrite history until you supply redacted versions — tracked in `open-questions.md`).
 
 ### P0-PRIV-2 — Confirm no student/phone number anywhere else
 - **Files:** all site source + remaining assets.
-- **Finding:** Scans of `*.html/css/js/json/md/xml/txt` found **no** occurrence of `202038089`, `+27 68 187 7663`, `681877663`, or `68 187 7663`. The phone number was **not** found in the thesis PDF text layer either.
+- **Finding:** Scans of `*.html/css/js/json/md/xml/txt` found **no** occurrence of the student number or the phone number (in any format). The phone number was **not** found in the thesis PDF text layer either.
 - **One-line fix:** None needed in code today, **but** `My Picture.jpg` was not inspected for EXIF/metadata (no tool) — see P1-PRIV-3. Add the automated secret-scan to CI (P2-DEP-1) so this can never regress.
 
 ### P0-HON-1 — Research "result" stated as fact on the page without the source present
@@ -113,7 +113,7 @@
 - **File:** n/a (missing `.github/workflows`).
 - **Fix (your chosen approach):** add a **GitHub Actions** workflow that runs on push/PR:
   1. `node --check` on JS (+ optional `eslint`/`prettier --check`).
-  2. **Node check script** (`scripts/check-content.mjs`) that **fails the build** if any of these strings appear in tracked site files: `[CONFIRM]`, `202038089`, `681877663` / `68 187 7663` / `+27 68 187 7663`.
+  2. **Node check script** (`scripts/check-content.mjs`) that **fails the build** if the student number, the phone number (any format), or `[CONFIRM]` appear in tracked site files.
   3. **PDF verification step** using `poppler-utils` (`pdftotext` + `pdfinfo`) on any committed PDF, failing if the student/phone numbers are present — this is the authoritative check your instruction requires (the sandbox could not run it).
   4. Internal **link check** (e.g. a small Node script or `lychee`) for broken local links/assets.
   5. Deploy to GitHub Pages on `main`.
