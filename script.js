@@ -9,6 +9,11 @@ const $  = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Enable reveal animations only when JS is running. Without this class,
+// `.reveal` elements stay fully visible, so the page can never render blank
+// if JavaScript is disabled or fails to execute.
+document.documentElement.classList.add('js-reveal');
+
 /* ---------------------------------------------------------
    DATA — only verified projects/skills, sourced from the
    repository, the honours thesis, and the owner's public
@@ -255,12 +260,26 @@ const PROJECT_CATS = [
 
 /* ---------------------------------------------------------
    LOADER
+   Hide reliably whether or not the window 'load' event has
+   already fired, and always hide via a hard timeout so the
+   overlay can never get stuck covering the page.
 --------------------------------------------------------- */
-window.addEventListener('load', () => {
-    const loader = $('#loader');
-    if (!loader) return;
-    setTimeout(() => loader.classList.add('hidden'), prefersReduced ? 200 : 900);
-});
+(function loader() {
+    const el = $('#loader');
+    if (!el) return;
+    let done = false;
+    const hide = () => { if (done) return; done = true; el.classList.add('hidden'); };
+    const delay = prefersReduced ? 150 : 700;
+
+    if (document.readyState === 'complete') {
+        // 'load' has already fired — hide after a short beat.
+        setTimeout(hide, delay);
+    } else {
+        window.addEventListener('load', () => setTimeout(hide, delay), { once: true });
+    }
+    // Hard safety net: never let the loader stay longer than 3s.
+    setTimeout(hide, 3000);
+})();
 
 /* ---------------------------------------------------------
    THEME
@@ -757,8 +776,11 @@ function closeModal() {
    SCROLL REVEAL (IntersectionObserver)
 --------------------------------------------------------- */
 let revealObserver;
+function revealAll() { $$('.reveal').forEach(el => el.classList.add('visible')); }
 function observeReveals() {
-    if (prefersReduced) { $$('.reveal').forEach(el => el.classList.add('visible')); return; }
+    // If reduced motion is requested or IntersectionObserver is unavailable,
+    // just show everything immediately.
+    if (prefersReduced || typeof IntersectionObserver === 'undefined') { revealAll(); return; }
     if (!revealObserver) {
         revealObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); } });
@@ -767,6 +789,9 @@ function observeReveals() {
     $$('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
 }
 observeReveals();
+// Fail-safe: whatever happens, reveal everything after 2.5s so content is
+// never left permanently hidden.
+setTimeout(revealAll, 2500);
 
 /* ---------------------------------------------------------
    FOOTER YEAR

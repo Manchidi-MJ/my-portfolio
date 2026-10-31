@@ -93,8 +93,11 @@ ul { list-style: none; }
     background: var(--bg);
     display: grid; place-items: center;
     transition: opacity 0.5s, visibility 0.5s;
+    /* CSS-only safety net: even if JS never runs, the loader fades away. */
+    animation: loader-autohide 0s linear 4s forwards;
 }
 .loader.hidden { opacity: 0; visibility: hidden; }
+@keyframes loader-autohide { to { opacity: 0; visibility: hidden; } }
 .loader-mark {
     font-family: var(--font-display); font-size: 2.4rem; font-weight: 800;
     letter-spacing: 6px; color: var(--text); text-align: center; margin-bottom: 18px;
@@ -406,9 +409,11 @@ footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 
 .footer-socials a:hover { color: var(--gold); }
 .footer-copy { text-align: center; color: var(--text-dim); font-size: 0.82rem; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border); max-width: var(--maxw); margin-inline: auto; }
 
-/* ---------- Reveal animation ---------- */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
-.reveal.visible { opacity: 1; transform: none; }
+/* ---------- Reveal animation ----------
+   Elements are only hidden once JS adds `.js-reveal` to <html>.
+   Without JS (or if JS fails) everything stays fully visible. */
+.js-reveal .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.js-reveal .reveal.visible { opacity: 1; transform: none; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 920px) {
@@ -442,6 +447,6 @@ footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-    .reveal { opacity: 1; transform: none; }
+    .js-reveal .reveal { opacity: 1; transform: none; }
     .portrait-ring { display: none; }
 }
