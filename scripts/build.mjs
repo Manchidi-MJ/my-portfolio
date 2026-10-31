@@ -16,9 +16,9 @@ const DIST = join(ROOT, 'dist');
 
 // Top-level files that make up the deployable site.
 const FILES = [
-    'index.html', '404.html', 'style.css', 'script.js',
+    'index.html', '404.html', 'style.css', 'script.js', 'data.js',
     'robots.txt', 'sitemap.xml', '.nojekyll',
-    'projects.js', 'manifest.json', 'CV.pdf'
+    'manifest.json', 'CV.pdf'
 ];
 // Asset folders copied wholesale if they exist.
 const DIRS = ['docs', 'thumbs', 'images'];
@@ -55,3 +55,6 @@ for (const dir of DIRS) {
 console.log('Built dist/ with:', copied.join(', ') || '(nothing)');
 const missing = FILES.filter(f => !existsSync(join(ROOT, f)));
 if (missing.length) console.log('Note (not yet present, will be included once added):', missing.join(', '));
+
+// Prerender dynamic sections into dist/index.html for no-JS visibility.
+await import('./prerender.mjs');
