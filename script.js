@@ -154,6 +154,7 @@ const PROJECTS = [
         tech: ['Snort', 'Ubuntu', 'Kali Linux', 'Metasploitable 2', 'VirtualBox'],
         status: 'verified',
         statusDetail: 'Built and verified in a controlled lab (SCSE082, Oct 2025).',
+        doc: 'docs/ids-ips-snort-report.pdf',
         repo: null,
         icon: 'fa-shield-halved',
         grad: 'linear-gradient(135deg,#ff6b6b,#d1374a)',
@@ -180,6 +181,7 @@ const PROJECTS = [
         tech: ['pfSense', 'Windows Server', 'Active Directory', 'DNS', 'DHCP', 'Kali Linux', 'Nessus'],
         status: 'partial',
         statusDetail: 'Built & verified: pfSense (dashboard + admin), static IP/gateway config and ping tests, Windows Server roles (AD DS, DNS, DHCP, file services), AD user creation, and Nessus on Kali (incl. nessusd service troubleshooting). Designed / planned (not yet deployed): Security Onion, Splunk, Wazuh, DMZ web/mail servers, and an internal CA.',
+        doc: 'docs/cybersecurity-homelab-report.pdf',
         repo: null,
         icon: 'fa-network-wired',
         grad: 'linear-gradient(135deg,#1fa2b8,#157f9a)',
@@ -284,12 +286,14 @@ const RESEARCH = [
    Filenames are lowercase-hyphenated and expected in the repo root once supplied.
    NOTE: the merged 84-page IDS/IPS+Homelab PDF must NOT be published; publish the two
    source reports separately (per Magaseng's instruction). */
+/* Fallback used if manifest.json can't be fetched (e.g. file:// or offline).
+   Keep in sync with manifest.json — that file is the source of truth at runtime. */
 const DOCUMENTS = [
-    { title: 'IDS/IPS with Snort — report', course: 'SCSE082', date: 'Oct 2025', pages: 66, size: '—', status: 'gated', file: 'docs/ids-ips-snort-report.pdf' },
-    { title: 'Cybersecurity HomeLab — report', course: 'Project', date: '2025', pages: 18, size: '—', status: 'gated', file: 'docs/cybersecurity-homelab-report.pdf' },
-    { title: 'Evaluating ML for Adaptive Ransomware Detection (Honours thesis)', course: 'Honours', date: '2025', pages: '—', size: '—', status: 'gated', file: 'docs/honours-thesis-ransomware.pdf' },
-    { title: 'Inadequate Post-Attack Procedures — research report', course: 'Research', date: 'Oct 2025', pages: '—', size: '—', status: 'gated', file: 'docs/post-attack-procedures-report.pdf' },
-    { title: 'Mobile Edge Computing — research assignment', course: 'Research', date: '2025', pages: '—', size: '—', status: 'gated', file: 'docs/mobile-edge-computing-assignment.pdf' }
+    { id: 'ids-ips', title: 'IDS/IPS with Snort — Project Report', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: 66, size: '', status: 'available', file: 'docs/ids-ips-snort-report.pdf', thumb: 'thumbs/ids-ips-snort-report.webp' },
+    { id: 'homelab', title: 'Cybersecurity HomeLab — Design, Implementation & Analysis', track: 'security', course: 'Computer Networking', date: '2025', pages: 18, size: '', status: 'available', file: 'docs/cybersecurity-homelab-report.pdf', thumb: 'thumbs/cybersecurity-homelab-report.webp' },
+    { id: 'post-attack', title: 'Inadequate Post-Attack Procedures — Report & Slides', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: '', size: '', status: 'available', file: 'docs/post-attack-procedures-report.pdf', thumb: 'thumbs/post-attack-procedures-report.webp' },
+    { id: 'mec', title: 'Mobile Edge Computing (MEC) — Research Assignment', track: 'data', course: 'Research Assignment', date: '2025', pages: 8, size: '', status: 'available', file: 'docs/mobile-edge-computing-assignment.pdf', thumb: 'thumbs/mobile-edge-computing-assignment.webp' },
+    { id: 'thesis', title: 'Evaluating ML for Adaptive Ransomware Detection — Honours Thesis', track: 'security', course: 'BSc Honours, Computer Science', date: '2025', pages: '', size: '', status: 'gated', file: 'docs/honours-thesis-ransomware.pdf', thumb: 'thumbs/honours-thesis-ransomware.webp' }
 ];
 const REQUEST_EMAIL = 'johnmanchidi@gmail.com';
 
@@ -622,6 +626,7 @@ function openCaseStudy(id) {
 
     const links = [];
     if (p.repo) links.push(`<a class="btn ghost" href="${p.repo}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View source</a>`);
+    if (p.doc) links.push(`<a class="btn ghost" href="${esc(p.doc)}" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> PDF report</a>`);
     if (p.paper) links.push(`<a class="btn ghost" href="${esc(p.paper)}" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> Read paper</a>`);
 
     body.innerHTML = `
@@ -681,8 +686,13 @@ function closeModal() {
 (function documents() {
     const body = $('#docsBody');
     if (!body) return;
-    const esc = s => String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
-    body.innerHTML = DOCUMENTS.map(d => {
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+
+    function row(d) {
+        const title = esc(d.title);
+        const thumb = d.thumb
+            ? `<img class="doc-thumb" src="${esc(d.thumb)}" alt="First page of ${title}" width="56" height="79" loading="lazy" decoding="async" onerror="this.style.display='none'" />`
+            : `<span class="doc-thumb doc-thumb-ph" aria-hidden="true"><i class="fas fa-file-pdf"></i></span>`;
         let access;
         if (d.status === 'available' && d.file) {
             access = `<a class="doc-link" href="${esc(d.file)}" target="_blank" rel="noopener"><i class="fas fa-eye" aria-hidden="true"></i> View</a>
@@ -693,14 +703,23 @@ function closeModal() {
             access = `<a class="doc-link request" href="mailto:${REQUEST_EMAIL}?subject=${subject}&body=${mailBody}"><i class="fas fa-envelope" aria-hidden="true"></i> Request full report</a>`;
         }
         return `<tr>
-            <td data-th="Title">${esc(d.title)}</td>
+            <td data-th="Preview" class="docs-thumb-col">${thumb}</td>
+            <td data-th="Title">${title}</td>
             <td data-th="Course">${esc(d.course)}</td>
             <td data-th="Date">${esc(d.date)}</td>
-            <td data-th="Pages">${esc(d.pages)}</td>
-            <td data-th="Size">${esc(d.size)}</td>
+            <td data-th="Pages">${esc(d.pages) || '—'}</td>
+            <td data-th="Size">${esc(d.size) || '—'}</td>
             <td data-th="Access" class="doc-access">${access}</td>
         </tr>`;
-    }).join('');
+    }
+    const paint = list => { body.innerHTML = list.map(row).join(''); };
+
+    // Source of truth is manifest.json; fall back to the embedded DOCUMENTS array.
+    paint(DOCUMENTS);
+    fetch('manifest.json')
+        .then(r => (r.ok ? r.json() : null))
+        .then(data => { if (data && Array.isArray(data.documents) && data.documents.length) paint(data.documents); })
+        .catch(() => { /* keep fallback */ });
 })();
 
 /* ---------------------------------------------------------
