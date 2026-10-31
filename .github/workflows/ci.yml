@@ -1,0 +1,90 @@
+name: CI & Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, content & privacy checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Syntax check JavaScript
+        run: |
+          node --check script.js
+          for f in scripts/*.mjs; do node --check "$f"; done
+
+      - name: Content & privacy check (fails on student/phone number)
+        # Non-strict: [CONFIRM] markers warn but don't fail the build yet.
+        # When all placeholders are resolved, add --strict to also fail on [CONFIRM].
+        run: node scripts/check-content.mjs
+
+      - name: Internal link & asset check
+        run: node scripts/check-links.mjs index.html 404.html
+
+      - name: Install poppler-utils (pdftotext / pdfinfo)
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: PDF privacy scan (authoritative — pdftotext/pdfinfo)
+        run: |
+          set -e
+          shopt -s nullglob globstar
+          pdfs=( **/*.pdf )
+          if [ ${#pdfs[@]} -eq 0 ]; then
+            echo "No PDFs committed — nothing to scan."
+            exit 0
+          fi
+          fail=0
+          for f in "${pdfs[@]}"; do
+            echo "::group::Scanning $f"
+            pdfinfo "$f" || true
+            text="$(pdftotext -enc UTF-8 "$f" - 2>/dev/null || true)"
+            meta="$(pdfinfo -meta "$f" 2>/dev/null || true)"
+            blob="$text$meta"
+            if printf '%s' "$blob" | grep -Eq '202038089'; then
+              echo "::error file=$f::student number 202038089 found in PDF"; fail=1
+            fi
+            if printf '%s' "$blob" | grep -Eq '(\+?27|0)[[:space:].-]*6?8[[:space:].-]*187[[:space:].-]*7663|681877663'; then
+              echo "::error file=$f::phone number found in PDF"; fail=1
+            fi
+            echo "::endgroup::"
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo "PDF privacy scan FAILED — do not publish."
+            exit 1
+          fi
+          echo "PDF privacy scan passed."
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: check
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
