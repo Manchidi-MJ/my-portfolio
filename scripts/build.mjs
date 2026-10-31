@@ -81,3 +81,17 @@ await import('./prerender.mjs');
         console.log('Applied content-hash cache-busting to dist/index.html');
     }
 }
+
+// Stamp sitemap.xml with today's <lastmod> (insert or update).
+{
+    const sm = join(DIST, 'sitemap.xml');
+    if (existsSync(sm)) {
+        const today = new Date().toISOString().slice(0, 10);
+        let xml = readFileSync(sm, 'utf8');
+        xml = /<lastmod>.*<\/lastmod>/.test(xml)
+            ? xml.replace(/<lastmod>.*<\/lastmod>/, `<lastmod>${today}</lastmod>`)
+            : xml.replace(/<\/loc>/, `</loc>\n    <lastmod>${today}</lastmod>`);
+        writeFileSync(sm, xml);
+        console.log('Stamped sitemap.xml lastmod =', today);
+    }
+}
