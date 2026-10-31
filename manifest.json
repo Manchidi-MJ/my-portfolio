@@ -1,0 +1,64 @@
+{
+  "documents": [
+    {
+      "id": "ids-ips",
+      "title": "IDS/IPS with Snort — Project Report",
+      "track": "security",
+      "course": "Computer Security (SCSE082)",
+      "date": "Oct 2025",
+      "pages": 66,
+      "size": "",
+      "file": "docs/ids-ips-snort-report.pdf",
+      "thumb": "thumbs/ids-ips-snort-report.webp",
+      "status": "available"
+    },
+    {
+      "id": "homelab",
+      "title": "Cybersecurity HomeLab — Design, Implementation & Analysis",
+      "track": "security",
+      "course": "Computer Networking",
+      "date": "2025",
+      "pages": 18,
+      "size": "",
+      "file": "docs/cybersecurity-homelab-report.pdf",
+      "thumb": "thumbs/cybersecurity-homelab-report.webp",
+      "status": "available"
+    },
+    {
+      "id": "post-attack",
+      "title": "Inadequate Post-Attack Procedures — Report & Slides",
+      "track": "security",
+      "course": "Computer Security (SCSE082)",
+      "date": "Oct 2025",
+      "pages": "",
+      "size": "",
+      "file": "docs/post-attack-procedures-report.pdf",
+      "thumb": "thumbs/post-attack-procedures-report.webp",
+      "status": "available"
+    },
+    {
+      "id": "mec",
+      "title": "Mobile Edge Computing (MEC) — Research Assignment",
+      "track": "data",
+      "course": "Research Assignment",
+      "date": "2025",
+      "pages": 8,
+      "size": "",
+      "file": "docs/mobile-edge-computing-assignment.pdf",
+      "thumb": "thumbs/mobile-edge-computing-assignment.webp",
+      "status": "available"
+    },
+    {
+      "id": "thesis",
+      "title": "Evaluating ML for Adaptive Ransomware Detection — Honours Thesis",
+      "track": "security",
+      "course": "BSc Honours, Computer Science",
+      "date": "2025",
+      "pages": "",
+      "size": "",
+      "file": "docs/honours-thesis-ransomware.pdf",
+      "thumb": "thumbs/honours-thesis-ransomware.webp",
+      "status": "gated"
+    }
+  ]
+}

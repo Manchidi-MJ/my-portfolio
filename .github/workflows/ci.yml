@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   check:
-    name: Lint, content & privacy checks
+    name: Lint, build, content & privacy checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,20 +31,28 @@ jobs:
           node --check script.js
           for f in scripts/*.mjs; do node --check "$f"; done
 
-      - name: Content & privacy check (fails on student/phone number)
-        # Non-strict: [CONFIRM] markers warn but don't fail the build yet.
-        # When all placeholders are resolved, add --strict to also fail on [CONFIRM].
-        run: node scripts/check-content.mjs
+      - name: Build dist/
+        run: node scripts/build.mjs
+
+      - name: Content & privacy check (source + built dist/)
+        # Hard-fails on the student/phone number anywhere. [CONFIRM] only warns in
+        # source; the deployed dist/ must be free of [CONFIRM] (checked --strict below).
+        run: |
+          node scripts/check-content.mjs
+          ( cd dist && node ../scripts/check-content.mjs --strict )
 
       - name: Internal link & asset check
         run: node scripts/check-links.mjs index.html 404.html
 
-      - name: Install poppler-utils (pdftotext / pdfinfo)
-        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Install poppler-utils (pdftotext / pdfinfo / strings via binutils)
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils binutils
 
-      - name: PDF privacy scan (authoritative — pdftotext/pdfinfo)
+      - name: PDF privacy scan (pdftotext + pdfinfo plain + strings)
         run: |
-          set -e
+          set -euo pipefail
+          # Single source of truth: build one ERE from FORBIDDEN in check-content.mjs.
+          REGEX="$(node -e "import('./scripts/check-content.mjs').then(m=>{console.log(m.FORBIDDEN.map(f=>f.re.source).join('|'))})")"
+          echo "Using privacy regex from check-content.mjs"
           shopt -s nullglob globstar
           pdfs=( **/*.pdf )
           if [ ${#pdfs[@]} -eq 0 ]; then
@@ -54,15 +62,13 @@ jobs:
           fail=0
           for f in "${pdfs[@]}"; do
             echo "::group::Scanning $f"
-            pdfinfo "$f" || true
+            # pdfinfo (plain) includes the Info dictionary: Title/Author/Subject/Keywords.
+            info="$(pdfinfo "$f" 2>/dev/null || true)"
             text="$(pdftotext -enc UTF-8 "$f" - 2>/dev/null || true)"
-            meta="$(pdfinfo -meta "$f" 2>/dev/null || true)"
-            blob="$text$meta"
-            if printf '%s' "$blob" | grep -Eq '202038089'; then
-              echo "::error file=$f::student number 202038089 found in PDF"; fail=1
-            fi
-            if printf '%s' "$blob" | grep -Eq '(\+?27|0)[[:space:].-]*6?8[[:space:].-]*187[[:space:].-]*7663|681877663'; then
-              echo "::error file=$f::phone number found in PDF"; fail=1
+            strs="$(strings -n 6 "$f" 2>/dev/null || true)"
+            if printf '%s\n%s\n%s' "$info" "$text" "$strs" | grep -Eq "$REGEX"; then
+              echo "::error file=$f::forbidden value (student or phone number) found in PDF"
+              fail=1
             fi
             echo "::endgroup::"
           done
@@ -71,6 +77,12 @@ jobs:
             exit 1
           fi
           echo "PDF privacy scan passed."
+
+      - name: Upload Pages artifact (dist only)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
   deploy:
     name: Deploy to GitHub Pages
@@ -81,10 +93,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
       - id: deployment
         uses: actions/deploy-pages@v4

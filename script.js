@@ -42,6 +42,7 @@ const SKILLS = [
 const PROJECTS = [
     {
         id: 'bigdata',
+        featured: true,
         title: 'E-Commerce Customer Churn & Big Data Analytics',
         date: '2026',
         category: 'data-eng',
@@ -120,6 +121,7 @@ const PROJECTS = [
         title: 'ML for Adaptive Ransomware Detection (Honours)',
         date: '2025',
         category: 'ai',
+        track: 'security',
         type: 'Academic · Honours research',
         desc: 'Honours thesis evaluating supervised and unsupervised ML models for ransomware detection on public datasets (Malimg, Microsoft BIG 2015). In my honours thesis, a Random Forest model achieved 99.34% accuracy on the evaluated dataset.',
         tech: ['Python', 'Scikit-learn', 'TensorFlow', 'Pandas'],
@@ -142,6 +144,7 @@ const PROJECTS = [
     },
     {
         id: 'ids',
+        featured: true,
         title: 'Intrusion Detection & Prevention with Snort',
         date: 'Oct 2025',
         category: 'security',
@@ -151,6 +154,7 @@ const PROJECTS = [
         tech: ['Snort', 'Ubuntu', 'Kali Linux', 'Metasploitable 2', 'VirtualBox'],
         status: 'verified',
         statusDetail: 'Built and verified in a controlled lab (SCSE082, Oct 2025).',
+        doc: 'docs/ids-ips-snort-report.pdf',
         repo: null,
         icon: 'fa-shield-halved',
         grad: 'linear-gradient(135deg,#ff6b6b,#d1374a)',
@@ -167,6 +171,7 @@ const PROJECTS = [
     },
     {
         id: 'homelab',
+        featured: true,
         title: 'Cybersecurity HomeLab (SME-style network)',
         date: 'Jan–Jun 2025',
         category: 'security',
@@ -176,6 +181,7 @@ const PROJECTS = [
         tech: ['pfSense', 'Windows Server', 'Active Directory', 'DNS', 'DHCP', 'Kali Linux', 'Nessus'],
         status: 'partial',
         statusDetail: 'Built & verified: pfSense (dashboard + admin), static IP/gateway config and ping tests, Windows Server roles (AD DS, DNS, DHCP, file services), AD user creation, and Nessus on Kali (incl. nessusd service troubleshooting). Designed / planned (not yet deployed): Security Onion, Splunk, Wazuh, DMZ web/mail servers, and an internal CA.',
+        doc: 'docs/cybersecurity-homelab-report.pdf',
         repo: null,
         icon: 'fa-network-wired',
         grad: 'linear-gradient(135deg,#1fa2b8,#157f9a)',
@@ -200,7 +206,7 @@ const PROJECTS = [
         tech: ['Python', 'MySQL', 'PostgreSQL'],
         track: 'data',
         status: 'verified',
-        statusDetail: 'Academic coursework; source not public. [CONFIRM] exact scope/results before adding specific metrics.',
+        statusDetail: 'Academic coursework; source code not public.',
         repo: null,
         icon: 'fa-database',
         grad: 'linear-gradient(135deg,#4c8dff,#1fa2b8)',
@@ -250,7 +256,7 @@ const PROJECTS = [
         tech: ['R', 'Python', 'Statistical Modelling'],
         track: 'data',
         status: 'verified',
-        statusDetail: 'Academic group project; source not public. [CONFIRM] exact scope/results before adding specific metrics.',
+        statusDetail: 'Academic group project; source code not public.',
         repo: null,
         icon: 'fa-square-root-variable',
         grad: 'linear-gradient(135deg,#7a5cff,#4c8dff)',
@@ -280,23 +286,22 @@ const RESEARCH = [
    Filenames are lowercase-hyphenated and expected in the repo root once supplied.
    NOTE: the merged 84-page IDS/IPS+Homelab PDF must NOT be published; publish the two
    source reports separately (per Magaseng's instruction). */
+/* Fallback used if manifest.json can't be fetched (e.g. file:// or offline).
+   Keep in sync with manifest.json — that file is the source of truth at runtime. */
 const DOCUMENTS = [
-    { title: 'IDS/IPS with Snort — report', course: 'SCSE082', date: 'Oct 2025', pages: 66, size: '—', status: 'gated', file: 'docs/ids-ips-snort-report.pdf' },
-    { title: 'Cybersecurity HomeLab — report', course: 'Project', date: '2025', pages: 18, size: '—', status: 'gated', file: 'docs/cybersecurity-homelab-report.pdf' },
-    { title: 'Evaluating ML for Adaptive Ransomware Detection (Honours thesis)', course: 'Honours', date: '2025', pages: '—', size: '—', status: 'gated', file: 'docs/honours-thesis-ransomware.pdf' },
-    { title: 'Inadequate Post-Attack Procedures — research report', course: 'Research', date: 'Oct 2025', pages: '—', size: '—', status: 'gated', file: 'docs/post-attack-procedures-report.pdf' },
-    { title: 'Mobile Edge Computing — research assignment', course: 'Research', date: '2025', pages: '—', size: '—', status: 'gated', file: 'docs/mobile-edge-computing-assignment.pdf' }
+    { id: 'ids-ips', title: 'IDS/IPS with Snort — Project Report', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: 66, size: '', status: 'available', file: 'docs/ids-ips-snort-report.pdf', thumb: 'thumbs/ids-ips-snort-report.webp' },
+    { id: 'homelab', title: 'Cybersecurity HomeLab — Design, Implementation & Analysis', track: 'security', course: 'Computer Networking', date: '2025', pages: 18, size: '', status: 'available', file: 'docs/cybersecurity-homelab-report.pdf', thumb: 'thumbs/cybersecurity-homelab-report.webp' },
+    { id: 'post-attack', title: 'Inadequate Post-Attack Procedures — Report & Slides', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: '', size: '', status: 'available', file: 'docs/post-attack-procedures-report.pdf', thumb: 'thumbs/post-attack-procedures-report.webp' },
+    { id: 'mec', title: 'Mobile Edge Computing (MEC) — Research Assignment', track: 'data', course: 'Research Assignment', date: '2025', pages: 8, size: '', status: 'available', file: 'docs/mobile-edge-computing-assignment.pdf', thumb: 'thumbs/mobile-edge-computing-assignment.webp' },
+    { id: 'thesis', title: 'Evaluating ML for Adaptive Ransomware Detection — Honours Thesis', track: 'security', course: 'BSc Honours, Computer Science', date: '2025', pages: '', size: '', status: 'gated', file: 'docs/honours-thesis-ransomware.pdf', thumb: 'thumbs/honours-thesis-ransomware.webp' }
 ];
 const REQUEST_EMAIL = 'johnmanchidi@gmail.com';
 
+/* Two career tracks + All. Filtering is by `track`, not fine-grained category. */
 const PROJECT_CATS = [
     { key: 'all', label: 'All' },
-    { key: 'data-eng', label: 'Data Engineering' },
-    { key: 'ai', label: 'AI / ML' },
-    { key: 'data-sci', label: 'Data Science' },
-    { key: 'software', label: 'Software' },
-    { key: 'database', label: 'Databases' },
-    { key: 'security', label: 'Cybersecurity' }
+    { key: 'security', label: 'Security' },
+    { key: 'data', label: 'Data' }
 ];
 
 /* Honesty status — separates what is actually built from what is only designed.
@@ -405,26 +410,6 @@ function statusBadge(status) {
 })();
 
 /* ---------------------------------------------------------
-   HERO ROTATOR (typing effect, reduced-motion aware)
---------------------------------------------------------- */
-(function rotator() {
-    const el = $('#rotator');
-    if (!el) return;
-    const words = ['Data Engineering', 'Software Development', 'Machine Learning', 'Data Science', 'Cloud & Cybersecurity', 'Technology Research'];
-    if (prefersReduced) { el.textContent = words[0]; return; }
-    let w = 0, c = 0, deleting = false;
-    (function tick() {
-        const word = words[w];
-        c += deleting ? -1 : 1;
-        el.textContent = word.slice(0, c);
-        let delay = deleting ? 55 : 110;
-        if (!deleting && c === word.length) { deleting = true; delay = 1600; }
-        else if (deleting && c === 0) { deleting = false; w = (w + 1) % words.length; delay = 350; }
-        setTimeout(tick, delay);
-    })();
-})();
-
-/* ---------------------------------------------------------
    INTERESTS + SKILLS
 --------------------------------------------------------- */
 (function interests() {
@@ -526,11 +511,18 @@ const projectUI = (function projects() {
     function esc(s) { return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
 
     function matches(p) {
-        const catOk = activeCat === 'all' || p.category === activeCat;
-        if (!catOk) return false;
+        const trackOk = activeCat === 'all' || p.track === activeCat;
+        if (!trackOk) return false;
         if (!query) return true;
         const hay = (p.title + ' ' + p.desc + ' ' + p.tech.join(' ') + ' ' + p.type).toLowerCase();
         return hay.includes(query);
+    }
+
+    // Featured first, then most recent. Dates may be '2026', 'Oct 2025', 'Jan–Jun 2025'.
+    function sortYear(d) { const m = String(d).match(/\d{4}/g); return m ? Math.max(...m.map(Number)) : 0; }
+    function byFeaturedThenDate(a, b) {
+        if (!!b.featured - !!a.featured) return (!!b.featured) - (!!a.featured);
+        return sortYear(b.date) - sortYear(a.date);
     }
 
     function card(p) {
@@ -541,6 +533,7 @@ const projectUI = (function projects() {
         <article class="project-card" data-id="${p.id}" tabindex="0" role="button" aria-label="Open case study: ${esc(p.title)}">
             <div class="project-thumb" style="background:${p.grad}">
                 <i class="fas ${p.icon}" aria-hidden="true"></i>
+                ${p.featured ? '<span class="featured-ribbon"><i class="fas fa-star" aria-hidden="true"></i> Featured</span>' : ''}
                 <span class="cat-label">${esc(p.type)}</span>
             </div>
             <div class="project-body">
@@ -557,7 +550,7 @@ const projectUI = (function projects() {
     }
 
     function render() {
-        const list = PROJECTS.filter(matches);
+        const list = PROJECTS.filter(matches).sort(byFeaturedThenDate);
         grid.innerHTML = list.map(card).join('');
         if (empty) empty.hidden = list.length !== 0;
         observeReveals();
@@ -613,6 +606,7 @@ function openCaseStudy(id) {
 
     const links = [];
     if (p.repo) links.push(`<a class="btn ghost" href="${p.repo}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View source</a>`);
+    if (p.doc) links.push(`<a class="btn ghost" href="${esc(p.doc)}" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> PDF report</a>`);
     if (p.paper) links.push(`<a class="btn ghost" href="${esc(p.paper)}" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> Read paper</a>`);
 
     body.innerHTML = `
@@ -672,8 +666,13 @@ function closeModal() {
 (function documents() {
     const body = $('#docsBody');
     if (!body) return;
-    const esc = s => String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
-    body.innerHTML = DOCUMENTS.map(d => {
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+
+    function row(d) {
+        const title = esc(d.title);
+        const thumb = d.thumb
+            ? `<img class="doc-thumb" src="${esc(d.thumb)}" alt="First page of ${title}" width="56" height="79" loading="lazy" decoding="async" onerror="this.style.display='none'" />`
+            : `<span class="doc-thumb doc-thumb-ph" aria-hidden="true"><i class="fas fa-file-pdf"></i></span>`;
         let access;
         if (d.status === 'available' && d.file) {
             access = `<a class="doc-link" href="${esc(d.file)}" target="_blank" rel="noopener"><i class="fas fa-eye" aria-hidden="true"></i> View</a>
@@ -684,14 +683,23 @@ function closeModal() {
             access = `<a class="doc-link request" href="mailto:${REQUEST_EMAIL}?subject=${subject}&body=${mailBody}"><i class="fas fa-envelope" aria-hidden="true"></i> Request full report</a>`;
         }
         return `<tr>
-            <td data-th="Title">${esc(d.title)}</td>
+            <td data-th="Preview" class="docs-thumb-col">${thumb}</td>
+            <td data-th="Title">${title}</td>
             <td data-th="Course">${esc(d.course)}</td>
             <td data-th="Date">${esc(d.date)}</td>
-            <td data-th="Pages">${esc(d.pages)}</td>
-            <td data-th="Size">${esc(d.size)}</td>
+            <td data-th="Pages">${esc(d.pages) || '—'}</td>
+            <td data-th="Size">${esc(d.size) || '—'}</td>
             <td data-th="Access" class="doc-access">${access}</td>
         </tr>`;
-    }).join('');
+    }
+    const paint = list => { body.innerHTML = list.map(row).join(''); };
+
+    // Source of truth is manifest.json; fall back to the embedded DOCUMENTS array.
+    paint(DOCUMENTS);
+    fetch('manifest.json')
+        .then(r => (r.ok ? r.json() : null))
+        .then(data => { if (data && Array.isArray(data.documents) && data.documents.length) paint(data.documents); })
+        .catch(() => { /* keep fallback */ });
 })();
 
 /* ---------------------------------------------------------
@@ -838,14 +846,10 @@ function closeModal() {
     const COMMANDS = [
         { label: 'Home', sub: 'Section', icon: 'fa-house', action: () => go('#home') },
         { label: 'About', sub: 'Section', icon: 'fa-user', action: () => go('#about') },
-        { label: 'What I bring', sub: 'Section', icon: 'fa-star', action: () => go('#services') },
-        { label: 'Education', sub: 'Section', icon: 'fa-graduation-cap', action: () => go('#education') },
-        { label: 'Skills', sub: 'Section', icon: 'fa-screwdriver-wrench', action: () => go('#skills') },
+        { label: 'Skills & certifications', sub: 'Section', icon: 'fa-screwdriver-wrench', action: () => go('#skills') },
         { label: 'Projects', sub: 'Section', icon: 'fa-layer-group', action: () => go('#projects') },
         { label: 'Research', sub: 'Section', icon: 'fa-flask', action: () => go('#research') },
-        { label: 'Certifications', sub: 'Section', icon: 'fa-certificate', action: () => go('#certifications') },
         { label: 'Documents', sub: 'Section', icon: 'fa-file-pdf', action: () => go('#documents') },
-        { label: 'GitHub section', sub: 'Section', icon: 'fa-code-branch', action: () => go('#github') },
         { label: 'CV', sub: 'Section', icon: 'fa-file-lines', action: () => go('#cv') },
         { label: 'Contact', sub: 'Section', icon: 'fa-envelope', action: () => go('#contact') },
         { label: 'Open GitHub profile', sub: 'External', icon: 'fa-github', ext: true, action: () => window.open('https://github.com/Manchidi-MJ', '_blank', 'noopener') },
