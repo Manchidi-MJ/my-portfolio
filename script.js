@@ -379,6 +379,53 @@ const PROJECT_CATS = [
     box.innerHTML = INTERESTS.map(i => `<span class="interest-tag">${i}</span>`).join('');
 })();
 
+/* ---------------------------------------------------------
+   SERVICES / "WHAT I BRING"
+--------------------------------------------------------- */
+(function services() {
+    const grid = $('#servicesGrid');
+    if (!grid) return;
+    const SERVICES = [
+        { icon: 'fa-diagram-project', title: 'Data Engineering', text: 'Building reproducible data pipelines with PySpark — cleaning, transforming and modelling data for analysis and ML.' },
+        { icon: 'fa-brain', title: 'AI & Machine Learning', text: 'Applying and evaluating ML models rigorously — including auditing for pitfalls like data leakage — using scikit-learn, TensorFlow and OpenCV.' },
+        { icon: 'fa-laptop-code', title: 'Software Development', text: 'Shipping practical applications and APIs with Python, Streamlit, FastAPI and modern web technologies.' },
+        { icon: 'fa-chart-line', title: 'Data Science & Analytics', text: 'Turning raw data into insight with Pandas, statistical modelling, RFM segmentation and clear visualisation.' },
+        { icon: 'fa-shield-halved', title: 'Cybersecurity & Networking', text: 'Hands-on security labs — IDS/IPS with Snort, segmented virtual enterprise networks and SIEM monitoring.' },
+        { icon: 'fa-square-root-variable', title: 'Mathematical Foundations', text: 'A BSc in Mathematical Sciences underpinning my work with solid grounding in analysis, statistics and computation.' }
+    ];
+    grid.innerHTML = SERVICES.map(s => `
+        <article class="service-card">
+            <div class="service-ico"><i class="fas ${s.icon}" aria-hidden="true"></i></div>
+            <h3>${s.title}</h3>
+            <p>${s.text}</p>
+        </article>`).join('');
+})();
+
+/* ---------------------------------------------------------
+   ANIMATED STAT COUNTERS
+--------------------------------------------------------- */
+(function stats() {
+    const nums = $$('.stat-num');
+    if (!nums.length) return;
+    function run(el) {
+        const target = +el.dataset.count || 0;
+        const suffix = el.dataset.suffix || '';
+        if (prefersReduced) { el.textContent = target + suffix; return; }
+        const dur = 1200; const start = performance.now();
+        (function frame(now) {
+            const p = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * eased) + suffix;
+            if (p < 1) requestAnimationFrame(frame);
+        })(start);
+    }
+    if (typeof IntersectionObserver === 'undefined') { nums.forEach(run); return; }
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(en => { if (en.isIntersecting) { run(en.target); obs.unobserve(en.target); } });
+    }, { threshold: 0.5 });
+    nums.forEach(n => io.observe(n));
+})();
+
 (function skills() {
     const grid = $('#skillsGrid');
     const filter = $('#skillsFilter');
@@ -708,6 +755,7 @@ function closeModal() {
     const COMMANDS = [
         { label: 'Home', sub: 'Section', icon: 'fa-house', action: () => go('#home') },
         { label: 'About', sub: 'Section', icon: 'fa-user', action: () => go('#about') },
+        { label: 'What I bring', sub: 'Section', icon: 'fa-star', action: () => go('#services') },
         { label: 'Education', sub: 'Section', icon: 'fa-graduation-cap', action: () => go('#education') },
         { label: 'Skills', sub: 'Section', icon: 'fa-screwdriver-wrench', action: () => go('#skills') },
         { label: 'Projects', sub: 'Section', icon: 'fa-layer-group', action: () => go('#projects') },
