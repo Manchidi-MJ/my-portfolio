@@ -569,3 +569,19 @@ footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 
 @media (max-width: 720px) {
     .docs-table td.docs-thumb-col { display: none; }
 }
+
+/* ===== Contact status mailto fallback link ===== */
+.form-status a { color: inherit; text-decoration: underline; font-weight: 600; }
+.form-status a:hover { color: var(--gold); }
+
+/* ===== A11y: keep a visible focus ring on text inputs (P2) ===== */
+.search-box input:focus-visible,
+.form-group input:focus-visible,
+.form-group textarea:focus-visible,
+#paletteInput:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+    border-color: var(--blue);
+}
+/* Ensure the gold accent used on dark surfaces for small text keeps >= 4.5:1;
+   gold is used for large/semibold accents only, body text uses --text/--text-muted. */

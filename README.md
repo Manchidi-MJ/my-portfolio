@@ -84,14 +84,19 @@ python3 -m http.server 8000
 
 ## 🌐 Deploy on GitHub Pages
 
-1. Push to the `main` branch of `Manchidi-MJ/my-portfolio`.
-2. On GitHub: **Settings → Pages**.
-3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-4. Select branch **`main`** and folder **`/ (root)`**, then **Save**.
-5. After a minute, the site is published at:
-   **https://manchidi-mj.github.io/my-portfolio/**
+Deployment is automated by **GitHub Actions** (`.github/workflows/ci.yml`):
 
-> The `.nojekyll` file ensures GitHub Pages serves every file (including those prefixed with `_`) as-is.
+1. On **Settings → Pages**, set **Source** to **GitHub Actions** (once).
+2. Push to `main`. CI then: syntax-checks JS → `node scripts/build.mjs` (assembles
+   `dist/`, prerenders sections, content-hashes assets, stamps the sitemap) →
+   runs the content/privacy + link checks → scans every PDF (`pdftotext`, `pdfinfo`,
+   `strings`) → uploads **`dist/`** and deploys it.
+3. The site is published at **https://manchidi-mj.github.io/my-portfolio/**.
+
+Only `dist/` is deployed, so internal docs (`audit.md`, `open-questions.md`) are never
+published. `build.mjs` runs locally too: `node scripts/build.mjs && open dist/index.html`.
+
+> The `.nojekyll` file ensures GitHub Pages serves every file as-is.
 
 ---
 
@@ -100,7 +105,7 @@ python3 -m http.server 8000
 | Item | Status | How to enable |
 |------|--------|---------------|
 | **CV download** | Not yet added | Drop a `CV.pdf` in the repo root. The CV section detects it automatically and shows a download button; until then it shows a clear "coming soon" placeholder. |
-| **Contact form** | Working | Uses an existing Web3Forms access key (a public, client-side key by design). Messages go to the configured inbox. To use your own, replace the `access_key` value in the contact form in `index.html`. |
+| **Contact form** | Working | Uses a Web3Forms access key (a public, client-side key by design). Messages go to the configured inbox; on failure the status shows a prefilled **mailto** fallback. To use your own, replace the `access_key` value in `index.html`. **Security:** in the Web3Forms dashboard, restrict the access key to the portfolio domain (`manchidi-mj.github.io`) so it can't be reused from other sites. |
 | **Canonical / OG URLs** | Set to GitHub Pages URL | If you move to a custom domain, update the `canonical`, Open Graph and `sitemap.xml`/`robots.txt` URLs. |
 | **Analytics** | Not included | No tracking scripts are bundled (privacy-first). If you later add privacy-friendly analytics (e.g. a consent-aware, cookieless provider), document it and add a short privacy note. |
 

@@ -16,7 +16,7 @@ const targets = files.length ? files : ['index.html', '404.html'];
 // Owner-supplied binaries that are intentionally referenced before they exist.
 // Missing ones are a NOTICE (wired, waiting on upload), not a failure. When the
 // files are added, the references simply resolve.
-const PENDING_ASSET = /^(docs\/.+\.pdf|CV\.pdf|images\/.+\.(webp|jpg|png))$/i;
+const PENDING_ASSET = /^(docs\/.+\.pdf|CV\.pdf|(images|thumbs)\/.+\.(webp|jpg|png))$/i;
 
 let broken = [];
 let pending = [];
