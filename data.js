@@ -20,7 +20,7 @@
         { cat: 'Data Engineering', icon: 'fa-diagram-project', items: ['PySpark', 'Big Data Processing', 'ETL / Pipelines', 'Data Cleaning', 'Feature Engineering'] },
         { cat: 'AI / Machine Learning', icon: 'fa-brain', items: ['Scikit-learn', 'TensorFlow', 'OpenCV', 'Classification', 'Model Evaluation', 'Agentic AI'] },
         { cat: 'Data Analytics', icon: 'fa-chart-line', items: ['Pandas', 'Plotly', 'RFM Segmentation', 'Statistical Modelling', 'Data Visualisation'] },
-        { cat: 'Databases', icon: 'fa-database', items: ['MySQL', 'PostgreSQL', 'SQL Querying', 'Schema Design'] },
+        { cat: 'Databases', icon: 'fa-database', items: ['PostgreSQL', 'MySQL', 'SQL Querying', 'Schema Design', 'Data Validation', 'Indexing / EXPLAIN'] },
         { cat: 'Software & Web', icon: 'fa-laptop-code', items: ['Streamlit', 'FastAPI', 'Flask', 'HTML / CSS / JS', 'REST APIs'] },
         { cat: 'Cloud & DevOps', icon: 'fa-cloud', items: ['AWS', 'Docker', 'Git / GitHub'] },
         { cat: 'Cybersecurity & Networking', icon: 'fa-shield-halved', items: ['Snort (IDS/IPS)', 'pfSense', 'Wireshark', 'Nmap', 'Metasploit', 'Security Onion', 'Splunk'] },
@@ -52,6 +52,32 @@
                 challenges: 'Discovering that the churn label was a deterministic rule (churned == days_since_last_purchase > 90), which a model can reproduce at ~100% without actually predicting.',
                 results: 'With leakage fields removed, no behavioural feature meaningfully predicted churn (ROC-AUC ≈ 0.54). The most valuable deliverable is the documented leakage audit and the honest, leakage-aware pipeline built around it.',
                 lessons: 'High headline accuracy can be an artefact of leakage. Rigorous auditing and honest reporting matter more than an impressive-looking score.'
+            }
+        },
+        {
+            id: 'sqlanalytics',
+            featured: true,
+            title: 'SQL Sales Analytics (PostgreSQL)',
+            date: '2026',
+            category: 'database',
+            type: 'Personal · Synthetic data',
+            desc: 'A reproducible PostgreSQL project on synthetic sales & manufacturing data: constrained schema, a staging→clean pipeline with data-quality checks, 15 graded SQL queries (window functions, NTILE RFM, cohort, Pareto), documented KPI views, an EXPLAIN before/after index study, pytest and GitHub Actions CI.',
+            tech: ['PostgreSQL', 'SQL', 'Python', 'Docker', 'GitHub Actions'],
+            track: 'data',
+            status: 'partial',
+            statusDetail: 'Code complete and runs via one command; all data is synthetic (seeded generator). Publication + CI verification pending — upgrade to "Built & verified" once the GitHub Actions pipeline (generate → load → SQL → pytest) is green.',
+            repo: 'https://github.com/Manchidi-MJ/sql-sales-analytics',
+            icon: 'fa-database',
+            grad: 'linear-gradient(135deg,#3b82f6,#1e3a8a)',
+            study: {
+                overview: 'A small, clean SQL project demonstrating schema design, data validation, business reporting, indexing/performance, testing and CI, on a sales-and-manufacturing data model. All data is synthetic, produced by a seeded, deterministic generator (seed 42: 1,000 customers, 10,000 orders, 25,083 order items).',
+                problem: 'Show real, runnable SQL skill (PostgreSQL) for entry-level data-analyst / reporting roles — reproducibly, with no privacy risk, and with honest data-quality handling.',
+                objectives: ['Design a constrained relational schema (PK/FK/CHECK/UNIQUE)', 'Generate reproducible synthetic data with deliberate, documented defects', 'Catch/repair defects in a staging→clean pipeline and log rejects', 'Answer 15 graded business questions in SQL', 'Measure and improve one query with an index'],
+                contribution: 'Sole author of the schema, generator, loader/cleaning, all 15 queries, KPI views, validation checks, performance study, tests and CI.',
+                methodology: 'Docker-Compose PostgreSQL 16; stdlib Python generator; CSVs loaded into loose staging tables, then cleaned into fully-constrained final tables with per-rule reject logging. Queries span basic aggregation to window functions, NTILE-based RFM, cohort retention, Pareto and LAG trends. KPI views back a dashboard.',
+                challenges: 'Injecting realistic data-quality problems (duplicate emails, NULL regions, negative quantities, future dates, orphan references) and proving they are caught — then asserting zero violations on the cleaned data in tests.',
+                results: 'Deterministic pipeline with a pytest suite (schema, zero-violation validation, KPI reconciliation). The EXPLAIN (ANALYZE, BUFFERS) before/after-index timings are recorded from the actual CI run in the repo’s docs/findings.md — not shown here until measured.',
+                lessons: 'Constraints and a staging→clean step make data integrity demonstrable, not assumed; measured EXPLAIN output turns “I know indexing” into a concrete, defensible result.'
             }
         },
         {
