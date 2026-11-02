@@ -84,6 +84,36 @@ jobs:
         with:
           path: dist
 
+  lighthouse:
+    name: Lighthouse (mobile, non-blocking)
+    needs: check
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build dist/
+        run: node scripts/build.mjs
+      - name: Serve dist/ and run Lighthouse
+        continue-on-error: true
+        run: |
+          npx --yes http-server dist -p 8080 &
+          sleep 3
+          npx --yes lighthouse http://localhost:8080 \
+            --preset=desktop --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox" \
+            --output=json --output-path=./lh.json --quiet || true
+          node -e "try{const r=require('./lh.json');const c=r.categories;console.log('Lighthouse:',Object.keys(c).map(k=>k+' '+Math.round(c[k].score*100)).join(' | '))}catch(e){console.log('Lighthouse run skipped/failed (non-blocking).')}"
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: lh.json
+          if-no-files-found: ignore
+
   deploy:
     name: Deploy to GitHub Pages
     needs: check

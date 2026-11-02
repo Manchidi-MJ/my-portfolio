@@ -8,7 +8,7 @@
  *
  * Usage:  node scripts/build.mjs
  */
-import { readdirSync, statSync, mkdirSync, copyFileSync, rmSync, existsSync } from 'node:fs';
+import { readdirSync, statSync, mkdirSync, copyFileSync, rmSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 
 const ROOT = process.cwd();
@@ -16,9 +16,9 @@ const DIST = join(ROOT, 'dist');
 
 // Top-level files that make up the deployable site.
 const FILES = [
-    'index.html', '404.html', 'style.css', 'script.js',
+    'index.html', '404.html', 'style.css', 'script.js', 'data.js',
     'robots.txt', 'sitemap.xml', '.nojekyll',
-    'projects.js', 'manifest.json', 'CV.pdf'
+    'manifest.json', 'CV.pdf'
 ];
 // Asset folders copied wholesale if they exist.
 const DIRS = ['docs', 'thumbs', 'images'];
@@ -55,3 +55,43 @@ for (const dir of DIRS) {
 console.log('Built dist/ with:', copied.join(', ') || '(nothing)');
 const missing = FILES.filter(f => !existsSync(join(ROOT, f)));
 if (missing.length) console.log('Note (not yet present, will be included once added):', missing.join(', '));
+
+// Prerender dynamic sections into dist/index.html for no-JS visibility.
+await import('./prerender.mjs');
+
+// Content-hash cache-busting: rewrite ?v=... on local css/js to a hash of their
+// bytes, so a changed asset always busts the cache and an unchanged one doesn't.
+{
+    const { createHash } = await import('node:crypto');
+    const hash = f => existsSync(join(DIST, f))
+        ? createHash('sha1').update(readFileSync(join(DIST, f))).digest('hex').slice(0, 10)
+        : null;
+    const idx = join(DIST, 'index.html');
+    if (existsSync(idx)) {
+        let html = readFileSync(idx, 'utf8');
+        for (const asset of ['style.css', 'script.js', 'data.js']) {
+            const h = hash(asset);
+            if (!h) continue;
+            const re = new RegExp(`(${asset.replace('.', '\\.')})\\?v=[^"']*`, 'g');
+            html = html.replace(re, `$1?v=${h}`);
+            // Also hash assets that currently have no ?v= (defensive).
+            html = html.replace(new RegExp(`(["'])(${asset.replace('.', '\\.')})(["'])`, 'g'), `$1$2?v=${h}$3`);
+        }
+        writeFileSync(idx, html);
+        console.log('Applied content-hash cache-busting to dist/index.html');
+    }
+}
+
+// Stamp sitemap.xml with today's <lastmod> (insert or update).
+{
+    const sm = join(DIST, 'sitemap.xml');
+    if (existsSync(sm)) {
+        const today = new Date().toISOString().slice(0, 10);
+        let xml = readFileSync(sm, 'utf8');
+        xml = /<lastmod>.*<\/lastmod>/.test(xml)
+            ? xml.replace(/<lastmod>.*<\/lastmod>/, `<lastmod>${today}</lastmod>`)
+            : xml.replace(/<\/loc>/, `</loc>\n    <lastmod>${today}</lastmod>`);
+        writeFileSync(sm, xml);
+        console.log('Stamped sitemap.xml lastmod =', today);
+    }
+}
