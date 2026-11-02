@@ -96,7 +96,6 @@ function renderDocs(D) {
             ? `<a class="doc-link" href="${esc(d.file)}" target="_blank" rel="noopener"><i class="fas fa-eye" aria-hidden="true"></i> View</a> <a class="doc-link" href="${esc(d.file)}" download><i class="fas fa-download" aria-hidden="true"></i> Download</a>`
             : `<a class="doc-link request" href="mailto:johnmanchidi@gmail.com?subject=${encodeURIComponent('Request for full report: ' + d.title)}"><i class="fas fa-envelope" aria-hidden="true"></i> Request full report</a>`;
         return `<tr>
-            <td data-th="Preview" class="docs-thumb-col">${thumb}</td>
             <td data-th="Title">${title}</td>
             <td data-th="Course">${esc(d.course)}</td>
             <td data-th="Date">${esc(d.date)}</td>

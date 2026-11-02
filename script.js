@@ -426,7 +426,6 @@ function closeModal(fromHash) {
             access = `<a class="doc-link request" href="mailto:${REQUEST_EMAIL}?subject=${subject}&body=${mailBody}"><i class="fas fa-envelope" aria-hidden="true"></i> Request full report</a>`;
         }
         return `<tr>
-            <td data-th="Preview" class="docs-thumb-col">${thumb}</td>
             <td data-th="Title">${title}</td>
             <td data-th="Course">${esc(d.course)}</td>
             <td data-th="Date">${esc(d.date)}</td>
@@ -678,7 +677,7 @@ function observeReveals() {
 observeReveals();
 // Fail-safe: whatever happens, reveal everything after 2.5s so content is
 // never left permanently hidden.
-setTimeout(revealAll, 2500);
+setTimeout(revealAll, 500);
 
 /* ---------------------------------------------------------
    FOOTER YEAR

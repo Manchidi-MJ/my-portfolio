@@ -585,3 +585,14 @@ footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 
 }
 /* Ensure the gold accent used on dark surfaces for small text keeps >= 4.5:1;
    gold is used for large/semibold accents only, body text uses --text/--text-muted. */
+
+/* ===== CSS safety: guarantee .reveal is visible after 1s even if JS fails ===== */
+@keyframes reveal-safety {
+    to { opacity: 1; transform: none; }
+}
+.js-reveal .reveal {
+    animation: reveal-safety 0s 1s forwards;
+}
+.js-reveal .reveal.visible {
+    animation: none;
+}
