@@ -10,7 +10,7 @@
       "size": "",
       "file": "docs/ids-ips-snort-report.pdf",
       "thumb": "thumbs/ids-ips-snort-report.webp",
-      "status": "available"
+      "status": "gated"
     },
     {
       "id": "homelab",
@@ -22,7 +22,7 @@
       "size": "",
       "file": "docs/cybersecurity-homelab-report.pdf",
       "thumb": "thumbs/cybersecurity-homelab-report.webp",
-      "status": "available"
+      "status": "gated"
     },
     {
       "id": "post-attack",
@@ -34,7 +34,7 @@
       "size": "",
       "file": "docs/post-attack-procedures-report.pdf",
       "thumb": "thumbs/post-attack-procedures-report.webp",
-      "status": "available"
+      "status": "gated"
     },
     {
       "id": "mec",
@@ -46,7 +46,7 @@
       "size": "",
       "file": "docs/mobile-edge-computing-assignment.pdf",
       "thumb": "thumbs/mobile-edge-computing-assignment.webp",
-      "status": "available"
+      "status": "gated"
     },
     {
       "id": "thesis",
