@@ -270,10 +270,10 @@
 
     // Runtime source of truth is manifest.json; this is the offline fallback.
     const DOCUMENTS = [
-        { id: 'ids-ips', title: 'IDS/IPS with Snort — Project Report', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: 66, size: '', status: 'gated', file: 'docs/ids-ips-snort-report.pdf', thumb: '' },
-        { id: 'homelab', title: 'Cybersecurity HomeLab — Design, Implementation & Analysis', track: 'security', course: 'Computer Networking', date: '2025', pages: 18, size: '', status: 'gated', file: 'docs/cybersecurity-homelab-report.pdf', thumb: '' },
-        { id: 'post-attack', title: 'Inadequate Post-Attack Procedures — Report & Slides', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: '', size: '', status: 'gated', file: 'docs/post-attack-procedures-report.pdf', thumb: '' },
-        { id: 'mec', title: 'Mobile Edge Computing (MEC) — Research Assignment', track: 'data', course: 'Research Assignment', date: '2025', pages: 8, size: '', status: 'gated', file: 'docs/mobile-edge-computing-assignment.pdf', thumb: '' },
+        { id: 'ids-ips', title: 'IDS/IPS with Snort — Project Report', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: 66, size: '9.3 MB', status: 'available', file: 'docs/ids-ips-snort-report.pdf', thumb: 'thumbs/ids-ips-snort-report.webp' },
+        { id: 'homelab', title: 'Cybersecurity HomeLab — Design, Implementation & Analysis', track: 'security', course: 'Computer Networking', date: '2025', pages: 18, size: '1.3 MB', status: 'available', file: 'docs/cybersecurity-homelab-report.pdf', thumb: 'thumbs/cybersecurity-homelab-report.webp' },
+        { id: 'post-attack', title: 'Inadequate Post-Attack Procedures — Report & Slides', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: 20, size: '5.0 MB', status: 'available', file: 'docs/post-attack-procedures-report.pdf', thumb: 'thumbs/post-attack-procedures-report.webp' },
+        { id: 'mec', title: 'Mobile Edge Computing (MEC) — Research Assignment', track: 'data', course: 'Research Assignment', date: '2025', pages: 9, size: '0.2 MB', status: 'available', file: 'docs/mobile-edge-computing-assignment.pdf', thumb: 'thumbs/mobile-edge-computing-assignment.webp' },
         { id: 'thesis', title: 'Evaluating ML for Adaptive Ransomware Detection — Honours Thesis', track: 'security', course: 'BSc Honours, Computer Science', date: '2025', pages: '', size: '', status: 'gated', file: 'docs/honours-thesis-ransomware.pdf', thumb: '' }
     ];
 

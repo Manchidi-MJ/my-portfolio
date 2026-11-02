@@ -50,8 +50,10 @@ my-portfolio/
 ├── robots.txt         # Crawl directives
 ├── sitemap.xml        # Sitemap
 ├── .nojekyll          # Serve files as-is on GitHub Pages
-├── My Picture.jpg     # Profile photograph (watermark to be cropped → images/profile.webp)
-├── docs/              # Redacted, privacy-checked PDFs (added as supplied)
+├── CV.pdf             # CV (phone number redacted)
+├── images/            # profile.webp / profile-480.webp / profile.jpg (cropped, EXIF-free) + og-image.jpg
+├── thumbs/            # Page-1 previews for the Documents table
+├── docs/              # Redacted, privacy-checked PDFs
 ├── scripts/
 │   ├── check-content.mjs  # Privacy/[CONFIRM] guard (Node, no deps)
 │   └── check-links.mjs    # Internal link & anchor checker
@@ -104,7 +106,7 @@ published. `build.mjs` runs locally too: `node scripts/build.mjs && open dist/in
 
 | Item | Status | How to enable |
 |------|--------|---------------|
-| **CV download** | Not yet added | Drop a `CV.pdf` in the repo root. The CV section detects it automatically and shows a download button; until then it shows a clear "coming soon" placeholder. |
+| **CV download** | Added | `CV.pdf` in the repo root (phone number redacted). Replace the file to update it — keep it free of the phone number or CI fails. |
 | **Contact form** | Working | Uses a Web3Forms access key (a public, client-side key by design). Messages go to the configured inbox; on failure the status shows a prefilled **mailto** fallback. To use your own, replace the `access_key` value in `index.html`. **Security:** in the Web3Forms dashboard, restrict the access key to the portfolio domain (`manchidi-mj.github.io`) so it can't be reused from other sites. |
 | **Canonical / OG URLs** | Set to GitHub Pages URL | If you move to a custom domain, update the `canonical`, Open Graph and `sitemap.xml`/`robots.txt` URLs. |
 | **Analytics** | Not included | No tracking scripts are bundled (privacy-first). If you later add privacy-friendly analytics (e.g. a consent-aware, cookieless provider), document it and add a short privacy note. |

@@ -22,8 +22,8 @@ const FILES = [
 ];
 // Asset folders copied wholesale if they exist.
 const DIRS = ['docs', 'thumbs', 'images'];
-// Legacy single asset (fallback portrait) copied if still present.
-const OPTIONAL_FILES = ['My Picture.jpg'];
+// No legacy single assets remain (the portrait now lives in images/).
+const OPTIONAL_FILES = [];
 
 function copyDir(src, dest) {
     mkdirSync(dest, { recursive: true });

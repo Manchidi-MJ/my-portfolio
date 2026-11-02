@@ -17,6 +17,14 @@ The supplied **Cybersecurity HomeLab report** text asserts Security Onion, Splun
 - The **website** keeps the honest, evidence-based split (verified core; rest designed/planned).
 - **Decision needed:** (1) keep the site's honest split and publish the report gated with a note; (2) you revise the report to match what's built before it's published; (3) you confirm the SIEM/DMZ/CA were in fact deployed+verified. Until you answer, the report stays **gated** and the site does not repeat the broader claims.
 
+## Update — 2 Nov 2026: files added
+- ✅ C. `CV.pdf` added (phone number removed, metadata cleaned).
+- ✅ D. Photo: new graduation portrait cropped (watermark removed, EXIF-free) → `images/profile.webp`, `profile-480.webp`, `profile.jpg`, `og-image.jpg`; `My Picture.jpg` deleted.
+- ✅ B. PDFs added and set `available`: IDS/IPS (66 pp), HomeLab (18 pp), Post-Attack (20 pp), MEC (9 pp). Student number/phone redacted, metadata scrubbed, OCR-checked.
+- ✅ G. Thumbnails generated.
+- ⏳ Still gated: honours thesis (no standalone thesis PDF was supplied — the 84-page `Academic_work__honours_project_.pdf` is the merged IDS/IPS + HomeLab file and must not be published).
+- ⚠️ HomeLab report is now public although the CAUTION below is still unresolved — set its `status` back to `'gated'` in `data.js` and `manifest.json` if you want to hold it.
+
 ## Needs you ⏳ — owner-supplied binaries (everything is wired; drop files in to activate)
 A. **Master's wording** — still unshown (`MASTERS_CONFIRMED` was left as the template placeholder). Give exact institution(s)/title(s)/dates to add an "Currently enrolled" block, or say "none" to leave as-is.
 B. **PDF files** into `docs/` (lowercase-hyphenated): `ids-ips-snort-report.pdf`, `cybersecurity-homelab-report.pdf`, `post-attack-procedures-report.pdf`, `mobile-edge-computing-assignment.pdf`; thesis `honours-thesis-ransomware.pdf` only if redacted (else stays gated). **Must be redacted** (no student/phone number) — CI enforces this.

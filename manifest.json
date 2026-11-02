@@ -7,10 +7,10 @@
       "course": "Computer Security (SCSE082)",
       "date": "Oct 2025",
       "pages": 66,
-      "size": "",
+      "size": "9.3 MB",
       "file": "docs/ids-ips-snort-report.pdf",
       "thumb": "thumbs/ids-ips-snort-report.webp",
-      "status": "gated"
+      "status": "available"
     },
     {
       "id": "homelab",
@@ -19,10 +19,10 @@
       "course": "Computer Networking",
       "date": "2025",
       "pages": 18,
-      "size": "",
+      "size": "1.3 MB",
       "file": "docs/cybersecurity-homelab-report.pdf",
       "thumb": "thumbs/cybersecurity-homelab-report.webp",
-      "status": "gated"
+      "status": "available"
     },
     {
       "id": "post-attack",
@@ -30,11 +30,11 @@
       "track": "security",
       "course": "Computer Security (SCSE082)",
       "date": "Oct 2025",
-      "pages": "",
-      "size": "",
+      "pages": 20,
+      "size": "5.0 MB",
       "file": "docs/post-attack-procedures-report.pdf",
       "thumb": "thumbs/post-attack-procedures-report.webp",
-      "status": "gated"
+      "status": "available"
     },
     {
       "id": "mec",
@@ -42,11 +42,11 @@
       "track": "data",
       "course": "Research Assignment",
       "date": "2025",
-      "pages": 8,
-      "size": "",
+      "pages": 9,
+      "size": "0.2 MB",
       "file": "docs/mobile-edge-computing-assignment.pdf",
       "thumb": "thumbs/mobile-edge-computing-assignment.webp",
-      "status": "gated"
+      "status": "available"
     },
     {
       "id": "thesis",
@@ -57,7 +57,7 @@
       "pages": "",
       "size": "",
       "file": "docs/honours-thesis-ransomware.pdf",
-      "thumb": "thumbs/honours-thesis-ransomware.webp",
+      "thumb": "",
       "status": "gated"
     }
   ]

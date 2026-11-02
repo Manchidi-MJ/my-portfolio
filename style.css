@@ -186,7 +186,8 @@ header.scrolled { border-color: var(--border); box-shadow: var(--shadow-sm); }
 .hero { min-height: 100vh; display: flex; align-items: center; padding-top: calc(var(--nav-h) + 40px); background-image: var(--hero-grad); }
 .hero-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; width: 100%; }
 .eyebrow { color: var(--gold); font-weight: 600; letter-spacing: 1px; }
-.hero-name { font-family: var(--font-display); font-size: clamp(2.3rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.05; margin: 10px 0 14px; letter-spacing: -1px; }
+.hero-grid > * { min-width: 0; } /* stop a long name from pushing the portrait off-screen */
+.hero-name { text-wrap: balance; font-family: var(--font-display); font-size: clamp(2.3rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.05; margin: 10px 0 14px; letter-spacing: -1px; }
 .hero-headline { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 600; color: var(--text); margin-bottom: 14px; }
 .hero-headline .sep { color: var(--gold); margin: 0 6px; }
 .hero-rotator { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 18px; min-height: 1.6em; }
@@ -204,6 +205,8 @@ header.scrolled { border-color: var(--border); box-shadow: var(--shadow-sm); }
 
 .hero-visual { display: flex; flex-direction: column; align-items: center; gap: 22px; }
 .portrait { position: relative; width: min(330px, 80vw); aspect-ratio: 1/1; border-radius: 50%; }
+.portrait picture { position: absolute; inset: 0; display: block; }
+.about-photo picture { display: block; }
 .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 50%; border: 3px solid var(--border); }
 .portrait-ring { position: absolute; inset: -12px; border-radius: 50%; border: 2px dashed var(--gold); opacity: 0.5; animation: spin 24s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }

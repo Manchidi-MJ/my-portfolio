@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Primary Meta -->
+    <title>Magaseng John Manchidi | Cybersecurity &amp; Data Analysis</title>
+    <meta name="description" content="Magaseng John Manchidi — MSc Data Engineering (Constructor University, Germany) &amp; MSc Computer Science (University of Limpopo). Cybersecurity, networking, data analysis and reporting. Projects, research and skills." />
+    <meta name="author" content="Magaseng John Manchidi" />
+    <meta name="keywords" content="Magaseng John Manchidi, Cybersecurity, SOC Analyst, Network Security, Data Analysis, Data Reporting, Snort, IDS IPS, Computer Science, University of Limpopo, Johannesburg, Portfolio" />
+    <link rel="canonical" href="https://manchidi-mj.github.io/my-portfolio/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Magaseng John Manchidi | Cybersecurity &amp; Data Analysis" />
+    <meta property="og:description" content="Computer Science Honours graduate building secure networks and turning data into decisions. Entry-level security &amp; data roles. Explore projects, research and skills." />
+    <meta property="og:url" content="https://manchidi-mj.github.io/my-portfolio/" />
+    <meta property="og:image" content="https://manchidi-mj.github.io/my-portfolio/My%20Picture.jpg" />
+    <meta property="og:image:alt" content="Magaseng John Manchidi — Cybersecurity & Data Analysis portfolio" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Magaseng John Manchidi" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Magaseng John Manchidi | Cybersecurity &amp; Data Analysis" />
+    <meta name="twitter:description" content="CS Honours graduate building secure networks and turning data into decisions. Security &amp; data projects and research." />
+    <meta name="twitter:image" content="https://manchidi-mj.github.io/my-portfolio/My%20Picture.jpg" />
+
+    <!-- Favicon (inline SVG) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230b1220'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='54' font-weight='700' text-anchor='middle' fill='%23e8b64c'%3EMJ%3C/text%3E%3C/svg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css?v=2025103106" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Magaseng John Manchidi",
+      "url": "https://manchidi-mj.github.io/my-portfolio/",
+      "image": "https://manchidi-mj.github.io/my-portfolio/My%20Picture.jpg",
+      "email": "mailto:johnmanchidi@gmail.com",
+      "sameAs": [
+        "https://github.com/Manchidi-MJ",
+        "https://www.linkedin.com/in/magaseng-john-manchidi-920442255/"
+      ],
+      "jobTitle": "MSc Data Engineering & MSc Computer Science candidate",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bremen", "addressCountry": "DE" },
+      "alumniOf": [
+        { "@type": "CollegeOrUniversity", "name": "University of Limpopo" },
+        { "@type": "CollegeOrUniversity", "name": "Constructor University" }
+      ],
+      "knowsAbout": ["Cybersecurity", "Network Security", "Intrusion Detection", "Data Analysis", "Data Reporting", "Computer Science", "Machine Learning"]
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <noscript>
+        <div style="background:#e8b64c;color:#0b1220;padding:12px 16px;text-align:center;font-family:system-ui,sans-serif">
+            This portfolio works best with JavaScript enabled. Some interactive sections (projects, skills, GitHub) need it to load.
+        </div>
+    </noscript>
+
+    <!-- Loader -->
+    <div class="loader" id="loader" aria-hidden="true">
+        <div class="loader-content">
+            <div class="loader-mark">MJM</div>
+            <div class="loader-bar"><span></span></div>
+        </div>
+    </div>
+
+    <!-- Scroll progress -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="nav" aria-label="Primary">
+            <a href="#home" class="logo" aria-label="Home — Magaseng John Manchidi">
+                <span class="logo-mark">MJ<span class="accent">M</span></span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#documents" class="nav-link">Documents</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="icon-btn palette-trigger" id="paletteTrigger" aria-label="Open command palette (Ctrl or Cmd + K)" title="Search (Ctrl/Cmd + K)">
+                    <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                    <span class="kbd-hint">⌘K</span>
+                </button>
+                <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle colour theme" aria-pressed="false" title="Toggle theme">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- ===== HERO ===== -->
+        <section id="home" class="section hero" aria-label="Introduction">
+            <div class="hero-grid">
+                <div class="hero-text reveal">
+                    <span class="availability"><span class="dot"></span> Open to entry-level roles: SOC / network security &amp; data / reporting</span>
+                    <span class="eyebrow">Hello, I'm</span>
+                    <h1 class="hero-name">Magaseng&nbsp;John&nbsp;Manchidi</h1>
+                    <p class="hero-headline">
+                        Computer&nbsp;Science Honours graduate building <strong>secure&nbsp;networks</strong>
+                        and turning <strong>data&nbsp;into&nbsp;decisions</strong>.
+                    </p>
+                    <p class="hero-bio">
+                        BSc Honours in Computer Science (University of Limpopo, 2025), currently pursuing two Master's
+                        degrees — <strong>MSc Data Engineering</strong> at Constructor University, Germany, and
+                        <strong>MSc Computer Science</strong> (dissertation) at the University of Limpopo. Based in Germany,
+                        working across <strong>cybersecurity &amp; networking</strong> and <strong>data analysis &amp; reporting</strong>.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn primary">
+                            <i class="fas fa-layer-group" aria-hidden="true"></i> View projects
+                        </a>
+                        <a href="#cv" class="btn ghost">
+                            <i class="fas fa-file-arrow-down" aria-hidden="true"></i> Download CV
+                        </a>
+                        <a href="#contact" class="btn ghost">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> Contact
+                        </a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://github.com/Manchidi-MJ" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/magaseng-john-manchidi-920442255/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="mailto:johnmanchidi@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal">
+                    <div class="portrait">
+                        <img src="My Picture.jpg" alt="Magaseng John Manchidi, Computer Science Honours graduate, in graduation attire" width="852" height="1003" fetchpriority="high" decoding="async" />
+                        <div class="portrait-ring" aria-hidden="true"></div>
+                    </div>
+                    <div class="hero-badges" aria-hidden="true">
+                        <span class="chip"><i class="fas fa-shield-halved"></i> Snort IDS/IPS</span>
+                        <span class="chip"><i class="fas fa-network-wired"></i> pfSense</span>
+                        <span class="chip"><i class="fas fa-chart-line"></i> SQL &amp; Excel</span>
+                        <span class="chip"><i class="fab fa-python"></i> Python</span>
+                    </div>
+                </div>
+            </div>
+            <a href="#about" class="scroll-cue" aria-label="Scroll to About">
+                <span class="mouse"></span>
+            </a>
+        </section>
+
+        <!-- ===== STATS BAND ===== -->
+        <section class="stats-band" aria-label="At a glance">
+            <div class="wrap stats-grid">
+                <div class="stat reveal">
+                    <span class="stat-num" data-count="2">0</span>
+                    <span class="stat-label">Master's degrees<br>in progress</span>
+                </div>
+                <div class="stat reveal">
+                    <span class="stat-num" data-count="5">0</span>
+                    <span class="stat-label">Project &amp; research<br>reports</span>
+                </div>
+                <div class="stat reveal">
+                    <span class="stat-num" data-count="66">0</span>
+                    <span class="stat-label">Page Snort<br>IDS/IPS report</span>
+                </div>
+                <div class="stat reveal">
+                    <span class="stat-num" data-count="3">0</span>
+                    <span class="stat-label">Cisco / CHPC<br>courses</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WHAT I BRING ===== -->
+        <section id="services" class="section" aria-labelledby="services-title">
+            <div class="wrap">
+                <p class="kicker">What I bring</p>
+                <h2 class="section-title" id="services-title">Where I add <span class="accent">value</span></h2>
+                <p class="section-lead">
+                    A blend of mathematical rigour, software craft and data-engineering fundamentals — applied honestly
+                    to real problems.
+                </p>
+                <div class="services-grid" id="servicesGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT ===== -->
+        <section id="about" class="section" aria-labelledby="about-title">
+            <div class="wrap">
+                <p class="kicker">About</p>
+                <h2 class="section-title" id="about-title">A technologist across <span class="accent">disciplines</span></h2>
+                <div class="about-layout">
+                    <div class="about-photo reveal">
+                        <img src="My Picture.jpg" alt="Magaseng John Manchidi" width="852" height="1003" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="about-body reveal">
+                        <p>
+                            I'm <strong>Magaseng John Manchidi</strong>, a South African <strong>Computer Science Honours
+                            graduate</strong> (University of Limpopo, 2025) currently pursuing two concurrent Master's degrees:
+                            <strong>MSc Data Engineering</strong> at Constructor University in Germany, and <strong>MSc Computer
+                            Science</strong> (dissertation-focused) at the University of Limpopo. I work across two tracks:
+                            <strong>security &amp; networking</strong> and <strong>data &amp; analytics</strong>.
+                        </p>
+                        <p>
+                            I'm drawn to problems where mathematics, software and data meet — building data pipelines,
+                            exploring machine-learning methods honestly (including auditing them for pitfalls such as data
+                            leakage), and shipping practical tools. I value clear reasoning, reproducible work and
+                            continuous learning across software engineering, AI/ML, databases, cloud, and cybersecurity.
+                        </p>
+                        <ul class="about-facts">
+                            <li><i class="fas fa-location-dot" aria-hidden="true"></i> Germany &amp; South Africa</li>
+                            <li><i class="fas fa-graduation-cap" aria-hidden="true"></i> Dual MSc candidate (Data Eng + CS)</li>
+                            <li><i class="fas fa-code-branch" aria-hidden="true"></i> Open to entry-level roles &amp; collaboration</li>
+                        </ul>
+                        <div class="about-interests" id="interestTags"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== EDUCATION ===== -->
+        <section id="education" class="section alt" aria-labelledby="edu-title">
+            <div class="wrap">
+                <p class="kicker">Education</p>
+                <h2 class="section-title" id="edu-title">Academic <span class="accent">journey</span></h2>
+
+                <h3 class="subhead"><i class="fas fa-circle-dot accent-ico" aria-hidden="true"></i> Currently pursuing</h3>
+                <div class="edu-current">
+                    <article class="edu-card featured reveal">
+                        <span class="edu-flag">In progress</span>
+                        <h4>MSc in Data Engineering</h4>
+                        <p class="edu-org"><i class="fas fa-university" aria-hidden="true"></i> Constructor University, Germany</p>
+                        <p class="edu-date"><i class="fas fa-calendar" aria-hidden="true"></i> September 2026 – Present</p>
+                        <p class="edu-note">Large-scale data systems, pipelines and the engineering foundations of data-driven applications.</p>
+                    </article>
+                    <article class="edu-card featured reveal">
+                        <span class="edu-flag">In progress</span>
+                        <h4>MSc in Computer Science (Dissertation)</h4>
+                        <p class="edu-org"><i class="fas fa-university" aria-hidden="true"></i> University of Limpopo, South Africa</p>
+                        <p class="edu-date"><i class="fas fa-calendar" aria-hidden="true"></i> January 2026 – Present</p>
+                        <p class="edu-note">Dissertation-focused programme building on honours-level research in machine learning and security.</p>
+                    </article>
+                </div>
+
+                <h3 class="subhead"><i class="fas fa-check accent-ico" aria-hidden="true"></i> Completed qualifications</h3>
+                <div class="edu-current">
+                    <article class="edu-card featured reveal">
+                        <span class="edu-flag">Latest</span>
+                        <h4>BSc Honours in Computer Science</h4>
+                        <p class="edu-org"><i class="fas fa-university" aria-hidden="true"></i> University of Limpopo, South Africa</p>
+                        <p class="edu-date"><i class="fas fa-calendar" aria-hidden="true"></i> Completed 2025</p>
+                        <p class="edu-note">Honours research evaluating machine-learning techniques for ransomware detection.</p>
+                    </article>
+                    <article class="edu-card featured reveal">
+                        <span class="edu-flag">Foundation</span>
+                        <h4>BSc in Mathematical Sciences</h4>
+                        <p class="edu-org"><i class="fas fa-university" aria-hidden="true"></i> University of Limpopo, South Africa</p>
+                        <p class="edu-date"><i class="fas fa-calendar" aria-hidden="true"></i> Completed 2024</p>
+                        <p class="edu-note">Mathematical foundations in analysis, statistics and computation underpinning my data work.</p>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== SKILLS ===== -->
+        <section id="skills" class="section" aria-labelledby="skills-title">
+            <div class="wrap">
+                <p class="kicker">Skills</p>
+                <h2 class="section-title" id="skills-title">Technical <span class="accent">toolkit</span></h2>
+                <p class="section-lead">
+                    Technologies I've applied in my projects and studies. These reflect practical exposure and ongoing
+                    learning rather than claims of expert-level mastery.
+                </p>
+                <div class="skills-filter" id="skillsFilter" role="tablist" aria-label="Filter skills by category"></div>
+                <div class="skills-grid" id="skillsGrid"></div>
+
+                <h3 class="subhead" id="cert-title"><i class="fas fa-certificate accent-ico" aria-hidden="true"></i> Courses &amp; certifications</h3>
+                <div class="cert-grid">
+                    <article class="cert-card reveal">
+                        <i class="fas fa-certificate cert-ico" aria-hidden="true"></i>
+                        <h4>Cisco Cybersecurity Essentials</h4>
+                        <p class="cert-org">Cisco Networking Academy</p>
+                    </article>
+                    <article class="cert-card reveal">
+                        <i class="fas fa-certificate cert-ico" aria-hidden="true"></i>
+                        <h4>Cisco Data Science Essentials</h4>
+                        <p class="cert-org">Cisco Networking Academy</p>
+                    </article>
+                    <article class="cert-card reveal">
+                        <i class="fas fa-certificate cert-ico" aria-hidden="true"></i>
+                        <h4>CHPC Programme</h4>
+                        <p class="cert-org">NITheCS (National Institute for Theoretical and Computational Sciences)</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PROJECTS ===== -->
+        <section id="projects" class="section alt" aria-labelledby="proj-title">
+            <div class="wrap">
+                <p class="kicker">Projects</p>
+                <h2 class="section-title" id="proj-title">Featured <span class="accent">work</span></h2>
+                <p class="section-lead">
+                    A selection of academic and personal projects. Each card links to real source code where available.
+                    Click a project for a detailed case study.
+                </p>
+
+                <div class="projects-controls">
+                    <div class="search-box">
+                        <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="search" id="projectSearch" placeholder="Search projects, technologies…" aria-label="Search projects" />
+                    </div>
+                    <div class="projects-filter" id="projectsFilter" role="tablist" aria-label="Filter projects by category"></div>
+                </div>
+
+                <div class="projects-grid" id="projectsContainer" aria-live="polite"></div>
+                <p class="empty-state" id="projectsEmpty" hidden>
+                    <i class="fas fa-folder-open" aria-hidden="true"></i>
+                    No projects match your search. Try a different keyword or category.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== RESEARCH ===== -->
+        <section id="research" class="section" aria-labelledby="research-title">
+            <div class="wrap">
+                <p class="kicker">Research</p>
+                <h2 class="section-title" id="research-title">Research &amp; <span class="accent">publications</span></h2>
+
+                <article class="research-feature reveal">
+                    <span class="research-badge">Honours Thesis · 2025</span>
+                    <h3>Evaluating Machine Learning Techniques for Adaptive Ransomware Detection</h3>
+                    <p class="research-meta">
+                        <span><i class="fas fa-users" aria-hidden="true"></i> Supervisors: Dr S.S. Mapunya, Prof M. Velempini</span>
+                        <span><i class="fas fa-building-columns" aria-hidden="true"></i> University of Limpopo</span>
+                    </p>
+                    <p>
+                        A comparative evaluation of supervised and unsupervised machine-learning models for ransomware
+                        detection using public datasets (Malimg, Microsoft BIG 2015). The study examined ensemble methods —
+                        reporting a best Random Forest accuracy of 99.34% on the evaluated data — and discussed feature
+                        importance and adaptability toward previously unseen variants.
+                    </p>
+                    <div class="tag-row">
+                        <span class="tag">Python</span><span class="tag">Scikit-learn</span>
+                        <span class="tag">TensorFlow</span><span class="tag">Pandas</span>
+                    </div>
+                    <a href="mailto:johnmanchidi@gmail.com?subject=Request%20for%20full%20honours%20thesis%20(Ransomware%20Detection)&amp;body=Hi%20Magaseng%2C%20please%20could%20you%20share%20the%20full%20honours%20thesis%3F" class="link-arrow">Request full report <i class="fas fa-envelope" aria-hidden="true"></i></a>
+                </article>
+
+                <div class="research-grid" id="researchGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== DOCUMENTS ===== -->
+        <section id="documents" class="section alt" aria-labelledby="docs-title">
+            <div class="wrap">
+                <p class="kicker">Documents</p>
+                <h2 class="section-title" id="docs-title">Reports &amp; <span class="accent">documents</span></h2>
+                <p class="section-lead">
+                    Reports are shared as PDFs; the full thesis is available on request.
+                </p>
+                <noscript>
+                    <p>Documents are available by request — email <a href="mailto:johnmanchidi@gmail.com">johnmanchidi@gmail.com</a>.</p>
+                </noscript>
+                <div class="docs-table-wrap">
+                    <table class="docs-table" id="docsTable" aria-label="Project and research documents">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Course</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Pages</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Access</th>
+                            </tr>
+                        </thead>
+                        <tbody id="docsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CV ===== -->
+        <section id="cv" class="section" aria-labelledby="cv-title">
+            <div class="wrap center-wrap">
+                <p class="kicker">Curriculum Vitae</p>
+                <h2 class="section-title" id="cv-title">Download my <span class="accent">CV</span></h2>
+                <div class="cv-card reveal" id="cvCard">
+                    <i class="fas fa-file-lines cv-ico" aria-hidden="true"></i>
+                    <p class="cv-text" id="cvText">
+                        A dedicated, up-to-date CV file has not yet been added to this repository.
+                    </p>
+                    <div class="cv-actions" id="cvActions">
+                        <span class="cv-pending"><i class="fas fa-circle-info" aria-hidden="true"></i> CV coming soon</span>
+                    </div>
+                    <p class="cv-hint" id="cvHint">
+                        To enable a download button, add a privacy-checked <code>CV.pdf</code> (no phone number) to the
+                        repository root — verified with <code>pdftotext</code> before publishing.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section id="contact" class="section alt" aria-labelledby="contact-title">
+            <div class="wrap">
+                <p class="kicker">Contact</p>
+                <h2 class="section-title" id="contact-title">Let's <span class="accent">connect</span></h2>
+                <div class="contact-layout">
+                    <div class="contact-info">
+                        <a class="contact-card" href="mailto:johnmanchidi@gmail.com">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <div><span>Email</span><strong>johnmanchidi@gmail.com</strong></div>
+                        </a>
+                        <a class="contact-card" href="https://github.com/Manchidi-MJ" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            <div><span>GitHub</span><strong>github.com/Manchidi-MJ</strong></div>
+                        </a>
+                        <a class="contact-card" href="https://www.linkedin.com/in/magaseng-john-manchidi-920442255/" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                            <div><span>LinkedIn</span><strong>Magaseng John Manchidi</strong></div>
+                        </a>
+                    </div>
+
+                    <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                        <input type="hidden" name="access_key" value="e11f1f1b-b689-4f02-a31f-b3d399b836d4" />
+                        <input type="hidden" name="from_name" value="Portfolio Contact Form" />
+                        <h3>Send a message</h3>
+
+                        <div class="form-group">
+                            <label for="cf-name">Name</label>
+                            <input type="text" id="cf-name" name="name" required autocomplete="name" />
+                            <span class="field-error" data-for="cf-name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-email">Email</label>
+                            <input type="email" id="cf-email" name="email" required autocomplete="email" />
+                            <span class="field-error" data-for="cf-email"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-subject">Subject</label>
+                            <input type="text" id="cf-subject" name="subject" required />
+                            <span class="field-error" data-for="cf-subject"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-message">Message</label>
+                            <textarea id="cf-message" name="message" rows="5" required></textarea>
+                            <span class="field-error" data-for="cf-message"></span>
+                        </div>
+                        <!-- Honeypot -->
+                        <input type="checkbox" name="botcheck" class="hp" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+                        <button type="submit" class="btn primary" id="cfSubmit">
+                            <span class="btn-label">Send Message</span>
+                            <i class="fas fa-spinner fa-spin btn-spinner" aria-hidden="true"></i>
+                        </button>
+                        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- ===== COMMAND PALETTE ===== -->
+    <div class="palette-overlay" id="paletteOverlay" hidden>
+        <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette">
+            <div class="palette-input-row">
+                <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                <input type="text" id="paletteInput" placeholder="Jump to a section or action…" aria-label="Search commands" autocomplete="off" />
+                <span class="palette-esc">Esc</span>
+            </div>
+            <ul class="palette-list" id="paletteList" role="listbox" aria-label="Commands"></ul>
+            <p class="palette-empty" id="paletteEmpty" hidden>No matching commands.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-mark">MJ<span class="accent">M</span></span>
+                <p>Cybersecurity, networking &amp; data</p>
+            </div>
+            <nav class="footer-links" aria-label="Footer">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#documents">Documents</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="footer-socials">
+                <a href="https://github.com/Manchidi-MJ" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/magaseng-john-manchidi-920442255/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                <a href="mailto:johnmanchidi@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <p class="footer-copy">&copy; <span id="year"></span> Magaseng John Manchidi. Built with HTML, CSS &amp; JavaScript.</p>
+    </footer>
+
+    <!-- Project case-study modal -->
+    <div class="modal-overlay" id="projectModal" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal-close" id="modalClose" aria-label="Close case study"><i class="fas fa-times" aria-hidden="true"></i></button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="data.js?v=2025103106" defer></script>
+    <script src="script.js?v=2025103106" defer></script>
+</body>
+</html>
