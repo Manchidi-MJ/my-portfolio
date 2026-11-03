@@ -133,23 +133,45 @@ statusDetail, repo, icon, grad, study{…}`. Keep claims to what is actually bui
 right `status`. Mark anything unconfirmed with `[CONFIRM]` (CI will flag it).
 
 ### How to add a PDF (privacy rule)
-1. **Redact first** — remove the student number and phone number from the PDF.
-2. **Verify** the PDF contains neither the student number nor the phone number, using
-   `pdftotext`, `pdfinfo` and `strings` (the exact regexes live in `scripts/check-content.mjs`,
-   the single source of truth). CI runs this automatically on every PDF — see the workflow.
+1. **Redact first** — remove any private values from the PDF.
+2. **Verify** the PDF with `pdftotext`, `pdfinfo` and `strings` against the privacy rules
+   (see **Privacy checks** below). CI runs this automatically on every PDF.
 3. Place the file under `docs/` (lowercase-hyphenated name) and set the matching
    `DOCUMENTS` entry `status: 'available'` with the correct `file`, `pages` and `size`.
-4. Never publish the merged 84-page IDS/IPS+HomeLab file — publish the two source reports
-   separately.
+4. Never publish the merged IDS/IPS+HomeLab file — publish the two source reports separately.
 
 ### How to add the CV
-Add a privacy-checked `CV.pdf` (no phone number) to the repo root. The CV section detects
-it automatically and shows Download/View buttons.
+Add a privacy-checked `CV.pdf` to the repo root. The CV section detects it automatically
+and shows Download/View buttons.
+
+### Privacy checks
+`scripts/check-content.mjs` scans tracked text files (and, in CI, PDF text) for private
+values. **It never contains those values itself** — the repo is public, so exact patterns
+are loaded from outside the repo:
+
+- **Locally:** create a gitignored file `.privacy-patterns` in the repo root, one regex per
+  line (`#` comments allowed). Example (use your own values, not these placeholders):
+  ```
+  # one regex per line
+  000000000
+  (\+?27|0)\s*00\s*000\s*0000
+  ```
+  `.privacy-patterns` is in `.gitignore` and must never be committed.
+- **In CI:** set a repository **Actions secret** named `PRIVACY_PATTERNS` (Settings →
+  Secrets and variables → Actions) with the same newline-separated regexes. The workflow
+  passes it as an environment variable.
+
+In addition, **generic rules always run with no setup** — e.g. any international-style phone
+number (`+` country code followed by 8+ digits) is flagged in text and PDF text.
+
+If neither `.privacy-patterns` nor `PRIVACY_PATTERNS` is present, the check prints a warning
+and runs the generic rules only — it does **not** fail the build just because the secret is
+missing.
 
 ### Checks (run locally before pushing)
 ```bash
 node --check script.js
-node scripts/check-content.mjs       # fails on student/phone number; warns on [CONFIRM]
+node scripts/check-content.mjs       # privacy scan (see above); warns on [CONFIRM]
 node scripts/check-links.mjs index.html 404.html
 ```
 CI (`.github/workflows/ci.yml`) runs these plus the authoritative poppler PDF scan, then

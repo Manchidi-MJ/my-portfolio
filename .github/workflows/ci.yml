@@ -35,11 +35,14 @@ jobs:
         run: node scripts/build.mjs
 
       - name: Content & privacy check (source + built dist/)
-        # Hard-fails on the student/phone number anywhere. [CONFIRM] only warns in
-        # source; the deployed dist/ must be free of [CONFIRM] (checked --strict below).
+        # Private patterns come from the PRIVACY_PATTERNS secret (newline-separated).
+        # If the secret is unset the generic rules still run (no failure for that).
+        # [CONFIRM] only warns in source; the deployed dist/ must be free of it.
+        env:
+          PRIVACY_PATTERNS: ${{ secrets.PRIVACY_PATTERNS }}
         run: |
           node scripts/check-content.mjs
-          ( cd dist && node ../scripts/check-content.mjs --strict )
+          ( cd dist && PRIVACY_PATTERNS="$PRIVACY_PATTERNS" node ../scripts/check-content.mjs --strict )
 
       - name: Internal link & asset check
         run: node scripts/check-links.mjs index.html 404.html
@@ -48,11 +51,14 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y poppler-utils binutils
 
       - name: PDF privacy scan (pdftotext + pdfinfo plain + strings)
+        env:
+          PRIVACY_PATTERNS: ${{ secrets.PRIVACY_PATTERNS }}
         run: |
           set -euo pipefail
-          # Single source of truth: build one ERE from FORBIDDEN in check-content.mjs.
-          REGEX="$(node -e "import('./scripts/check-content.mjs').then(m=>{console.log(m.FORBIDDEN.map(f=>f.re.source).join('|'))})")"
-          echo "Using privacy regex from check-content.mjs"
+          # Single source of truth: private patterns (from the PRIVACY_PATTERNS secret)
+          # plus the generic rules, emitted by check-content.mjs. No value is hard-coded.
+          REGEX="$(node scripts/check-content.mjs --print-regex)"
+          echo "Using combined privacy regex (private patterns + generic rules)"
           shopt -s nullglob globstar
           pdfs=( **/*.pdf )
           if [ ${#pdfs[@]} -eq 0 ]; then
@@ -67,7 +73,7 @@ jobs:
             text="$(pdftotext -enc UTF-8 "$f" - 2>/dev/null || true)"
             strs="$(strings -n 6 "$f" 2>/dev/null || true)"
             if printf '%s\n%s\n%s' "$info" "$text" "$strs" | grep -Eq "$REGEX"; then
-              echo "::error file=$f::forbidden value (student or phone number) found in PDF"
+              echo "::error file=$f::a private/forbidden value was found in this PDF"
               fail=1
             fi
             echo "::endgroup::"

@@ -22,7 +22,8 @@
       "size": "1.3 MB",
       "file": "docs/cybersecurity-homelab-report.pdf",
       "thumb": "thumbs/cybersecurity-homelab-report.webp",
-      "status": "available"
+      "status": "available",
+      "note": "Report also documents planned components (SIEM/DMZ) not shown in the screenshots."
     },
     {
       "id": "post-attack",
@@ -34,7 +35,8 @@
       "size": "5.0 MB",
       "file": "docs/post-attack-procedures-report.pdf",
       "thumb": "thumbs/post-attack-procedures-report.webp",
-      "status": "available"
+      "status": "available",
+      "note": "Illustrative scenario (\u201cXYZ Corp\u201d is fictional). Statistics are drawn from cited industry reports \u2014 check against the originals."
     },
     {
       "id": "mec",

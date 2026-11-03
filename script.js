@@ -425,8 +425,9 @@ function closeModal(fromHash) {
             const mailBody = encodeURIComponent('Hi Magaseng,\n\nPlease could you share the full report: "' + d.title + '".\n\nThanks.');
             access = `<a class="doc-link request" href="mailto:${REQUEST_EMAIL}?subject=${subject}&body=${mailBody}"><i class="fas fa-envelope" aria-hidden="true"></i> Request full report</a>`;
         }
+        const note = d.note ? `<span class="doc-note">${esc(d.note)}</span>` : '';
         return `<tr>
-            <td data-th="Title">${title}</td>
+            <td data-th="Title">${title}${note}</td>
             <td data-th="Course">${esc(d.course)}</td>
             <td data-th="Date">${esc(d.date)}</td>
             <td data-th="Pages">${esc(d.pages) || '—'}</td>
