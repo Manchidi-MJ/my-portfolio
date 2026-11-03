@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://manchidi-mj.github.io/my-portfolio/sitemap.xml
