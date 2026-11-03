@@ -23,7 +23,7 @@
         { cat: 'Databases', icon: 'fa-database', items: ['MySQL', 'PostgreSQL', 'SQL Querying', 'Schema Design'] },
         { cat: 'Software & Web', icon: 'fa-laptop-code', items: ['Streamlit', 'FastAPI', 'Flask', 'HTML / CSS / JS', 'REST APIs'] },
         { cat: 'Cloud & DevOps', icon: 'fa-cloud', items: ['AWS', 'Docker', 'Git / GitHub'] },
-        { cat: 'Cybersecurity & Networking', icon: 'fa-shield-halved', items: ['Snort (IDS/IPS)', 'pfSense', 'Wireshark', 'Nmap', 'Metasploit', 'Security Onion', 'Splunk'] },
+        { cat: 'Cybersecurity & Networking', icon: 'fa-shield-halved', items: ['Snort (IDS/IPS)', 'pfSense', 'Active Directory', 'Nessus', 'Wireshark', 'Nmap', 'Metasploit'] },
         { cat: 'Tools & Platforms', icon: 'fa-screwdriver-wrench', items: ['VMware', 'VirtualBox', 'Active Directory', 'Windows Server', 'Linux', 'Jupyter'] }
     ];
 
@@ -165,10 +165,10 @@
             category: 'security',
             track: 'security',
             type: 'Personal · Lab project',
-            desc: 'A segmented, SME-style virtual network. Built & verified: pfSense firewall, a Windows Server domain controller (AD DS, DNS, DHCP), a Kali workstation and Nessus vulnerability scanning. Further monitoring/DMZ components are designed / planned (see status).',
-            tech: ['pfSense', 'Windows Server', 'Active Directory', 'DNS', 'DHCP', 'Kali Linux', 'Nessus'],
+            desc: 'A segmented, SME-style virtual network. Evidenced by screenshots: a pfSense firewall, a Windows Server 2019 domain controller (AD DS, DNS, DHCP), Windows 10 clients, a Kali Linux workstation and a Nessus install/connection. A SIEM/DMZ monitoring layer is planned (roadmap), not yet deployed.',
+            tech: ['pfSense', 'Windows Server 2019', 'Active Directory', 'DNS', 'DHCP', 'Windows 10', 'Kali Linux', 'Nessus'],
             status: 'partial',
-            statusDetail: 'Built & verified: pfSense (dashboard + admin), static IP/gateway config and ping tests, Windows Server roles (AD DS, DNS, DHCP, file services), AD user creation, and Nessus on Kali (incl. nessusd service troubleshooting). Designed / planned (not yet deployed): Security Onion, Splunk, Wazuh, DMZ web/mail servers, and an internal CA.',
+            statusDetail: 'Evidenced by screenshots: pfSense (dashboard + admin), static IP/gateway config and ping tests, Windows Server 2019 roles (AD DS, DNS, DHCP), Windows 10 domain clients, and a Nessus install/connection on Kali (incl. nessusd service troubleshooting). Planned / roadmap (NOT evidenced): Security Onion, Splunk, Wazuh, a DMZ with web/mail servers, and remediation results. The report documents these planned components, which the screenshots do not show.',
             doc: 'docs/cybersecurity-homelab-report.pdf',
             repo: null,
             icon: 'fa-network-wired',
@@ -180,7 +180,7 @@
                 contribution: 'Designed the network and deployed the verified components: pfSense, the Windows Server domain controller and its roles, the Kali workstation and Nessus.',
                 methodology: 'Virtualised SME network: pfSense firewall (static IP/gateway, verified by dashboard access and ping tests), Windows Server with AD DS/DNS/DHCP/file services and created AD users, and a Kali workstation running Nessus (including nessusd service troubleshooting).',
                 challenges: 'Getting the Nessus service (nessusd) running reliably on Kali, and configuring addressing/gateway so segments routed correctly.',
-                results: 'A verified core: a working pfSense firewall, a functioning AD domain controller with DNS/DHCP and users, and Nessus scanning from Kali. The SIEM/monitoring and DMZ layer (Security Onion, Splunk, Wazuh, DMZ servers, internal CA) is designed but NOT yet deployed, and no detection/remediation results are claimed for it.',
+                results: 'Evidenced by screenshots: a working pfSense firewall, a functioning Windows Server 2019 AD domain controller with DNS/DHCP, Windows 10 domain clients, and a Nessus install/connection on Kali. The SIEM/monitoring and DMZ layer (Security Onion, Splunk, Wazuh, DMZ servers) is planned/roadmap only — NOT deployed — and no detection or remediation results are claimed. The report also documents these planned components, which the screenshots do not show.',
                 lessons: 'Standing up directory services, firewalling and vulnerability scanning end-to-end builds practical intuition that theory alone cannot — and being explicit about what is built vs planned keeps the work honest.'
             }
         },
@@ -263,16 +263,16 @@
 
     const RESEARCH = [
         { title: 'Mobile Edge Computing (MEC)', desc: 'Investigated the Mobile Edge Computing paradigm — its benefits, challenges and use cases for latency-sensitive applications such as autonomous vehicles and smart manufacturing — and considered security and resource-management angles.', tags: ['Edge Computing', '5G', 'IoT'] },
-        { title: 'Inadequate Post-Attack Procedures in Cybersecurity', desc: 'A research report (with presentation) examining the importance of post-attack procedures, common gaps in incident response, and practices for more effective recovery and organisational resilience. The “XYZ Corp” breach used throughout is an illustrative scenario, not a real incident; figures are those stated in the report.', tags: ['Illustrative scenario', 'Incident Response', 'Recovery'] },
-        { title: 'Cybersecurity HomeLab Implementation', desc: 'Documented building a cybersecurity homelab simulating a small-business network with pfSense, Active Directory and security-monitoring tooling.', tags: ['pfSense', 'Active Directory', 'SIEM'] },
+        { title: 'Inadequate Post-Attack Procedures in Cybersecurity', desc: 'A research report (with presentation) examining the importance of post-attack procedures, common gaps in incident response, and practices for more effective recovery and organisational resilience. The “XYZ Corp” breach is an illustrative scenario, not a real incident. Statistics are drawn from cited industry reports and should be checked against the originals.', tags: ['Illustrative scenario', 'Incident Response', 'Recovery'] },
+        { title: 'Cybersecurity HomeLab Implementation', desc: 'Documented building a cybersecurity homelab simulating a small-business network: pfSense firewall, a Windows Server 2019 domain controller (AD DS, DNS, DHCP), Windows 10 clients, Kali and Nessus. A SIEM/DMZ monitoring layer is documented as planned (roadmap), not deployed.', tags: ['pfSense', 'Active Directory', 'Nessus'] },
         { title: 'IDS/IPS Configuration with Snort', desc: 'Developed and tested custom Snort rules for detecting and preventing network attacks in a controlled virtual lab.', tags: ['Snort', 'Kali Linux', 'Metasploitable'] }
     ];
 
     // Runtime source of truth is manifest.json; this is the offline fallback.
     const DOCUMENTS = [
         { id: 'ids-ips', title: 'IDS/IPS with Snort — Project Report', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: 66, size: '9.3 MB', status: 'available', file: 'docs/ids-ips-snort-report.pdf', thumb: 'thumbs/ids-ips-snort-report.webp' },
-        { id: 'homelab', title: 'Cybersecurity HomeLab — Design, Implementation & Analysis', track: 'security', course: 'Computer Networking', date: '2025', pages: 18, size: '1.3 MB', status: 'available', file: 'docs/cybersecurity-homelab-report.pdf', thumb: 'thumbs/cybersecurity-homelab-report.webp' },
-        { id: 'post-attack', title: 'Inadequate Post-Attack Procedures — Report & Slides', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: 20, size: '5.0 MB', status: 'available', file: 'docs/post-attack-procedures-report.pdf', thumb: 'thumbs/post-attack-procedures-report.webp' },
+        { id: 'homelab', title: 'Cybersecurity HomeLab — Design, Implementation & Analysis', track: 'security', course: 'Computer Networking', date: '2025', pages: 18, size: '1.3 MB', status: 'available', file: 'docs/cybersecurity-homelab-report.pdf', thumb: 'thumbs/cybersecurity-homelab-report.webp', note: 'Report also documents planned components (SIEM/DMZ) not shown in the screenshots.' },
+        { id: 'post-attack', title: 'Inadequate Post-Attack Procedures — Report & Slides', track: 'security', course: 'Computer Security (SCSE082)', date: 'Oct 2025', pages: 20, size: '5.0 MB', status: 'available', file: 'docs/post-attack-procedures-report.pdf', thumb: 'thumbs/post-attack-procedures-report.webp', note: 'Illustrative scenario (“XYZ Corp” is fictional). Statistics are drawn from cited industry reports — check against the originals.' },
         { id: 'mec', title: 'Mobile Edge Computing (MEC) — Research Assignment', track: 'data', course: 'Research Assignment', date: '2025', pages: 9, size: '0.2 MB', status: 'available', file: 'docs/mobile-edge-computing-assignment.pdf', thumb: 'thumbs/mobile-edge-computing-assignment.webp' },
         { id: 'thesis', title: 'Evaluating ML for Adaptive Ransomware Detection — Honours Thesis', track: 'security', course: 'BSc Honours, Computer Science', date: '2025', pages: '', size: '', status: 'gated', file: 'docs/honours-thesis-ransomware.pdf', thumb: '' }
     ];
